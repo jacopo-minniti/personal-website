@@ -4,9 +4,9 @@ export default function Navbar() {
   return (
     <nav className="bg-primary py-4">
       <div className="container mx-auto flex justify-between items-center px-6">
-        <Link href="/" className="text-2xl font-bold">
+        <div className="text-4xl font-bold">
           Jacopo Minniti
-        </Link>
+        </div>
         <ul className="flex space-x-8">
           <li>
             <Link href="/" className="hover:text-accent transition-colors">
