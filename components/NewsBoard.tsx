@@ -40,10 +40,6 @@ export default function NewsBoard() {
                         </details>
                     ))}
 
-                    {/* Formatting cursor at the end */}
-                    <div className="mt-4 animate-pulse text-accent font-bold">
-                        _
-                    </div>
                 </div>
             </div>
         </TerminalCard>
