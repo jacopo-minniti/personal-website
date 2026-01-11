@@ -1,8 +1,9 @@
-export default function Research() {
+export default function ResearchPage() {
   return (
-    <main className="container mx-auto px-6 py-12">
-      <h1 className="text-4xl font-bold mb-4">Research</h1>
-      <p className="text-xl">Coming soon.</p>
-    </main>
+    <div className="min-h-[80vh] flex items-center justify-center">
+      <h1 className="text-4xl font-serif font-light text-foreground opacity-80 animate-pulse">
+        Coming Very Soon
+      </h1>
+    </div>
   );
 }
