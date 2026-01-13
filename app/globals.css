@@ -84,3 +84,64 @@ body {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: var(--muted);
 }
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    font-family: 'Times New Roman', Times, serif !important;
+  }
+
+  /* Hide UI elements not needed for PDF */
+  header,
+  footer,
+  aside,
+  .no-print,
+  nav,
+  iframe,
+  .video-container {
+    display: none !important;
+  }
+
+  /* Reset layout for print */
+  main {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 1cm !important;
+    /* Slightly larger than original */
+    margin: 0 !important;
+  }
+
+  .prose,
+  .prose * {
+    max-width: none !important;
+    color: black !important;
+    font-family: 'Times New Roman', Times, serif !important;
+    font-size: 13pt !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Fix for massive images in print */
+  .prose img {
+    max-width: 60% !important;
+    height: auto !important;
+    display: block !important;
+    margin: 1rem auto !important;
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    color: black !important;
+    font-family: 'Times New Roman', Times, serif !important;
+  }
+
+  /* Ensure links are readable */
+  a {
+    text-decoration: underline;
+    color: black !important;
+  }
+}

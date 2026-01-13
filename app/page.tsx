@@ -12,9 +12,9 @@ export default function Home() {
       <div className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-8 mb-8 items-stretch">
 
         {/* Profile Card */}
-        <div className="md:col-span-5 flex">
+        <div className="md:col-span-4 flex">
           <TerminalCard title="user_profile.jpg" className="h-full">
-            <div className="relative w-full h-full flex-1">
+            <div className="relative w-full h-full flex-1 p-24">
               <Image
                 src="/profile.jpg"
                 alt="Jacopo Minniti"
@@ -27,12 +27,17 @@ export default function Home() {
         </div>
 
         {/* Bio / Terminal Output */}
-        <div className="md:col-span-7 flex">
+        <div className="md:col-span-8 flex">
           <TerminalCard title="bio.md" className="h-full">
             <BioCard />
           </TerminalCard>
         </div>
 
+      </div>
+
+      {/* News Board */}
+      <div className="max-w-5xl mx-auto w-full mb-8">
+        <NewsBoard />
       </div>
 
       {/* Widgets Row (Quotes + Gallery) */}
@@ -43,11 +48,6 @@ export default function Home() {
         <div className="md:col-span-8 overflow-hidden">
           <GalleryViewer />
         </div>
-      </div>
-
-      {/* News Board */}
-      <div className="max-w-5xl mx-auto w-full mb-8">
-        <NewsBoard />
       </div>
 
       {/* Footer */}

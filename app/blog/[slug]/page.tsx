@@ -1,4 +1,5 @@
-import { getPostData } from '@/lib/posts';
+import { getPostData, getSortedPostsData } from '@/lib/posts';
+import type { Metadata } from 'next';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
@@ -7,8 +8,12 @@ import Image from 'next/image';
 import 'katex/dist/katex.min.css'; // Latex styles
 
 // Components for MDX
+import Link from 'next/link';
+
+// Components for MDX
 import TerminalCard from '@/components/TerminalCard';
 import TableOfContents from '@/components/TableOfContents';
+import BlogActions from '@/components/BlogActions';
 
 function SideNote({ children, id }: { children: React.ReactNode; id: string }) {
     return (
@@ -47,6 +52,34 @@ interface Props {
     params: Promise<{ slug: string }>;
 }
 
+export async function generateStaticParams() {
+    const posts = getSortedPostsData();
+    return posts.map((post) => ({
+        slug: post.id,
+    }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug } = await params;
+    const post = await getPostData(slug);
+
+    if (!post) {
+        return {
+            title: 'Post Not Found',
+        };
+    }
+
+    return {
+        title: post.title,
+        description: post.subtitle || `Read ${post.title} on Jacopo Minniti's blog`,
+        openGraph: {
+            title: post.title,
+            description: post.subtitle || `Read ${post.title} on Jacopo Minniti's blog`,
+            images: post.thumbnail ? [post.thumbnail] : [],
+        },
+    };
+}
+
 export default async function BlogPost({ params }: Props) {
     const { slug } = await params;
     const post = await getPostData(slug);
@@ -58,13 +91,25 @@ export default async function BlogPost({ params }: Props) {
     return (
         <div className="min-h-screen pb-16">
 
+            {/* Print Header */}
+            <div className="hidden print:block mb-8 border-b-2 border-black pb-4">
+                <div className="flex items-center gap-4 mb-2">
+                    <div>
+                        <h1 className="text-2xl font-bold font-serif text-black">{post.title}</h1>
+                        <p className="text-sm font-serif text-gray-600">
+                            Jacopo Minniti · {new Date(post.date).getFullYear()} · v1.0
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             {/* Top Cover Image */}
-            <div className="w-full h-[40vh] md:h-[50vh] relative mb-8 border-b border-border">
+            <div className="w-full h-[40vh] md:h-[50vh] relative mb-8 border-b border-border print:hidden">
                 <Image
                     src={post.thumbnail || '/background.jpg'}
                     alt={post.title}
                     fill
-                    className="object-cover brightness-50"
+                    className="object-cover brightness-[0.6]"
                     priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
@@ -88,17 +133,9 @@ export default async function BlogPost({ params }: Props) {
                 <aside className="hidden lg:block w-40 flex-shrink-0 space-y-6">
                     <div>
                         <div className="text-xs font-bold text-muted uppercase tracking-wider mb-2 font-mono">Operations</div>
-                        <div className="flex flex-col gap-4">
-                            <button className="group border border-border p-2 text-sm text-muted hover:text-[var(--pastel-blue)] hover:border-[var(--pastel-blue)] transition-colors text-left font-mono">
-                                <span className="text-[var(--pastel-blue)] opacity-50 group-hover:opacity-100 mr-2">$</span>
-                                share-link
-                            </button>
-                            <button className="group border border-border p-2 text-sm text-muted hover:text-[var(--pastel-red)] hover:border-[var(--pastel-red)] transition-colors text-left font-mono">
-                                <span className="text-[var(--pastel-red)] opacity-50 group-hover:opacity-100 mr-2">$</span>
-                                convert-to-pdf
-                            </button>
-                        </div>
+                        <BlogActions />
                     </div>
+
 
                     <div className="sticky top-32">
                         <TableOfContents />
