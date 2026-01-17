@@ -5,53 +5,21 @@ import Image from 'next/image';
 import TerminalCard from './TerminalCard';
 import { quotes, galleryImages } from '@/lib/home-data';
 
-function TypingQuote({ text, author, delay = 0 }: { text: string; author: string; delay?: number }) {
-    const [displayedText, setDisplayedText] = useState("");
-    const [showAuthor, setShowAuthor] = useState(false);
-
-    useEffect(() => {
-        let index = 0;
-        const timeout = setTimeout(() => {
-            const interval = setInterval(() => {
-                if (index < text.length) {
-                    setDisplayedText(text.substring(0, index + 1));
-                    index++;
-                } else {
-                    clearInterval(interval);
-                    setShowAuthor(true);
-                }
-            }, 30);
-            return () => clearInterval(interval);
-        }, delay);
-        return () => clearTimeout(timeout);
-    }, [text, delay]);
-
-    return (
-        <div className="border-l-2 border-[var(--pastel-orange)] pl-3 text-foreground mb-4 hover:text-[var(--pastel-orange)] transition-colors group cursor-default">
-            <p className="mb-1 leading-relaxed">
-                &quot;{displayedText}&quot;
-            </p>
-            {showAuthor && (
-                <p className="text-xs italic text-muted opacity-80 group-hover:text-[var(--pastel-orange)]/80 transition-colors animate-in fade-in slide-in-from-left-2 duration-700">
-                    – {author}
-                </p>
-            )}
-        </div>
-    );
-}
 
 export function QuotesBox() {
     return (
         <TerminalCard title="nice_quotes.txt" className="h-full">
             <div className="p-6 font-mono text-sm h-full max-h-[400px] min-h-[300px] overflow-y-auto bg-[#0d1117] custom-scrollbar">
-                <div className="flex flex-col">
+                <div className="flex flex-col space-y-4">
                     {quotes.map((quote, i) => (
-                        <TypingQuote
-                            key={i}
-                            text={quote.text}
-                            author={quote.author}
-                            delay={i * 1500}
-                        />
+                        <div key={i} className="border-l-2 border-[var(--pastel-orange)] pl-3 text-foreground hover:text-[var(--pastel-orange)] transition-colors group cursor-default">
+                            <p className="mb-1 leading-relaxed">
+                                &quot;{quote.text}&quot;
+                            </p>
+                            <p className="text-xs italic text-muted opacity-80 group-hover:text-[var(--pastel-orange)]/80 transition-colors">
+                                – {quote.author}
+                            </p>
+                        </div>
                     ))}
                 </div>
             </div>

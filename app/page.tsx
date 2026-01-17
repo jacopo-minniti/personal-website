@@ -3,6 +3,7 @@ import TerminalCard from "@/components/TerminalCard";
 import NewsBoard from "@/components/NewsBoard";
 import { QuotesBox, GalleryViewer } from "@/components/HomeWidgets";
 import BioCard from "@/components/BioCard";
+import ResearchInterests from "@/components/ResearchInterests";
 
 export default function Home() {
   return (
@@ -38,6 +39,11 @@ export default function Home() {
       {/* News Board */}
       <div className="max-w-5xl mx-auto w-full mb-8">
         <NewsBoard />
+      </div>
+
+      {/* Research Interests */}
+      <div className="max-w-5xl mx-auto w-full mb-8">
+        <ResearchInterests />
       </div>
 
       {/* Widgets Row (Quotes + Gallery) */}

@@ -11,42 +11,22 @@ interface Paper {
   year: string;
   abstract: string;
   link: string;
-  tags: string[];
+  keywords: string[];
   arxiv?: string; // Optional Arxiv ID or Link
 }
 
 const papers: Paper[] = [
   {
     id: "p1",
-    title: "Agentic Reasoning in Large Language Models",
-    authors: ["J. Minniti", "A. Turing", "G. Hinton"],
-    journal: "NeurIPS 2024 (Under Review)",
-    year: "2024",
-    abstract: "This paper explores the emergence of agentic behaviors in LLMs when provided with recursive self-reflection capabilities. We demonstrate a 40% improvement in multi-step reasoning tasks compared to standard chain-of-thought prompting.",
+    title: "Interpreting LLM–Brain Alignment Through Shared Inductive Biases",
+    authors: ["Minniti, J."],
+    journal: "Abstract submitted to HSP 2026",
+    year: "2025",
+    abstract: "Large Language Models (LLMs) allow us to probe human language processing in a direct way by comparing their sentence representations to activity in the human Language Network (LN). In this setting, high “brain scores”—correlations between LLM sentence representations and LN fMRI responses—are often taken as evidence of shared computational principles (Goldstein et al., 2022). However, such scores can be inflated by trivial properties such as sentence length (Feghhi et al., 2024), and mechanistic differences between biological and artificial networks make it unclear which aspects of sentence processing this alignment actually reflects.\n\nWe therefore ask how to embed brain scores in a principled framework where they provide evidence about *shared inductive biases* (IBs) between LLMs and the LN. Inductive biases are a natural level of analysis for alignment work, yet they have so far played only an informal role. Our contribution is twofold. First, motivated by the goal of using high alignment as evidence about key computational components of human language processing, we propose a framework for studying shared IBs in language tasks. Second, we design experiments that begin to validate this framework and demonstrate how it can be applied to analyze alignment results.\n\nWe focus on the Pereira et al. (2018) fMRI dataset (N = 384 short, read English sentences grouped by topic). Following AlKhamissi et al. (2024), we retain only the top 512 most LN-aligned LLM units and fit voxel-wise ridge regression decoders from LLM representations to fMRI responses.",
     link: "#",
-    tags: ["LLM", "Agents", "Reasoning"],
-    arxiv: "2405.12345"
+    keywords: ["Inductive Biases", "NeuroAI", "LLMs"],
+    arxiv: ""
   },
-  {
-    id: "p2",
-    title: "Neuromorphic Computing for Energy Efficient AI",
-    authors: ["J. Minniti", "N. Tesla"],
-    journal: "Nature Electronics",
-    year: "2023",
-    abstract: "We propose a new architecture for spiking neural networks that drastically reduces power consumption during inference by leveraging event-driven processing.",
-    link: "#",
-    tags: ["Hardware", "Neuromorphic", "Green AI"]
-  },
-  {
-    id: "p3",
-    title: "The Poetry of Code: Aesthetics in Software Engineering",
-    authors: ["J. Minniti"],
-    journal: "Journal of Digital Humanities",
-    year: "2022",
-    abstract: "An essay discussion on the similarities between writing elegant code and composing poetry, arguing for a return to craftsmanship in software development.",
-    link: "#",
-    tags: ["Philosophy", "Humanities"]
-  }
 ];
 
 export default function ResearchPage() {
@@ -63,7 +43,7 @@ export default function ResearchPage() {
           <span className="text-[var(--pastel-orange)]">&gt;</span> Research Papers
         </h1>
         <p className="font-mono text-muted text-sm md:text-base max-w-4xl">
-          Selected publications and preprints. Click on an entry to view the abstract.
+          Selected publications and preprints. <strong>Some papers have been submitted or are currently in writing, they are going to be listed here soon.</strong> Click on an entry to view the abstract.
         </p>
       </header>
 
@@ -81,25 +61,12 @@ export default function ResearchPage() {
                     <h2 className="text-xl font-bold font-mono text-foreground mb-2 group-hover:text-[var(--pastel-orange)] transition-colors">
                       {paper.title}
                     </h2>
-                    <div className="text-sm text-muted font-mono mb-2">
+                    <div className="text-sm text-muted font-mono">
                       {paper.authors.map((author, i) => (
                         <span key={i} className={author.includes("Minniti") ? "text-foreground font-bold" : ""}>
                           {author}{i < paper.authors.length - 1 ? ", " : ""}
                         </span>
                       ))}
-                    </div>
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      <span className="text-xs font-bold bg-[var(--pastel-blue)]/10 text-[var(--pastel-blue)] px-2 py-1 rounded border border-[var(--pastel-blue)]/20 font-mono">
-                        {paper.journal}
-                      </span>
-                      <span className="text-xs font-bold bg-white/5 text-muted px-2 py-1 rounded border border-white/10 font-mono">
-                        {paper.year}
-                      </span>
-                      {paper.arxiv && (
-                        <span className="text-xs font-bold bg-[var(--pastel-red)]/10 text-[var(--pastel-red)] px-2 py-1 rounded border border-[var(--pastel-red)]/20 font-mono">
-                          Arxiv
-                        </span>
-                      )}
                     </div>
                   </div>
 
@@ -107,6 +74,26 @@ export default function ResearchPage() {
                     <span className={`text-xs text-[var(--pastel-orange)] font-mono transition-transform duration-300 ${openId === paper.id ? 'rotate-90' : ''}`}>
                       [EXPAND]
                     </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center justify-between gap-4 mt-4">
+                  <div className="flex flex-wrap gap-2">
+                    <span className="text-xs font-bold bg-[var(--pastel-blue)]/10 text-[var(--pastel-blue)] px-2 py-1 rounded border border-[var(--pastel-blue)]/20 font-mono">
+                      {paper.journal}
+                    </span>
+                    <span className="text-xs font-bold bg-white/5 text-muted px-2 py-1 rounded border border-white/10 font-mono">
+                      {paper.year}
+                    </span>
+                    {paper.arxiv && (
+                      <span className="text-xs font-bold bg-[var(--pastel-red)]/10 text-[var(--pastel-red)] px-2 py-1 rounded border border-[var(--pastel-red)]/20 font-mono">
+                        Arxiv
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-xs text-muted font-mono text-right">
+                    <span className="font-bold opacity-60 mr-1">Keywords:</span>
+                    <span className="italic">{paper.keywords.map(k => `#${k}`).join(", ")}</span>
                   </div>
                 </div>
               </div>
@@ -118,13 +105,13 @@ export default function ResearchPage() {
                                     ${openId === paper.id ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
                                 `}
               >
-                <div className="p-6 bg-black/20">
+                <div className="p-6 bg-black/20 relative">
                   <h3 className="text-xs font-bold uppercase tracking-widest text-muted mb-2 font-mono">Abstract</h3>
-                  <p className="text-sm text-muted/90 font-mono leading-relaxed mb-6">
+                  <p className="text-sm text-muted/90 font-mono leading-relaxed mb-6 whitespace-pre-line">
                     {paper.abstract}
                   </p>
 
-                  <div className="flex gap-4">
+                  <div className="flex gap-4 relative z-10">
                     <a
                       href={paper.link}
                       target="_blank"
@@ -139,6 +126,21 @@ export default function ResearchPage() {
                     >
                       Cite (BibTeX)
                     </a>
+                  </div>
+
+                  {/* Minimalist Visualization */}
+                  <div className="absolute bottom-4 right-4 opacity-20 pointer-events-none">
+                    <svg width="100" height="60" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="20" cy="30" r="3" className="fill-current text-muted" />
+                      <circle cx="50" cy="10" r="3" className="fill-current text-muted" />
+                      <circle cx="50" cy="50" r="3" className="fill-current text-muted" />
+                      <circle cx="80" cy="30" r="3" className="fill-current text-muted" />
+                      <path d="M20 30 L50 10" className="stroke-current text-muted" strokeWidth="1" />
+                      <path d="M20 30 L50 50" className="stroke-current text-muted" strokeWidth="1" />
+                      <path d="M50 10 L80 30" className="stroke-current text-muted" strokeWidth="1" />
+                      <path d="M50 50 L80 30" className="stroke-current text-muted" strokeWidth="1" />
+                      <path d="M50 10 L50 50" className="stroke-current text-muted" strokeWidth="1" strokeDasharray="4 2" />
+                    </svg>
                   </div>
                 </div>
               </div>

@@ -1,22 +1,5 @@
 import TerminalCard from './TerminalCard';
-
-const newsItems = [
-    {
-        date: "2024-05-15",
-        title: "New Research Paper Published",
-        content: "My latest work on agentic reasoning has been accepted at NeurIPS 2024. Check the research page for the preprint."
-    },
-    {
-        date: "2024-04-02",
-        title: "Launched Personal Website v2.0",
-        content: "Redesigned the entire portfolio using Next.js and a custom terminal-inspired theme. Open source on GitHub."
-    },
-    {
-        date: "2024-03-10",
-        title: "Speaker at AI Summit",
-        content: "Gave a talk about the future of LLMs and their application in creative writing. Slides available soon."
-    }
-];
+import { newsItems } from '@/lib/home-data';
 
 export default function NewsBoard() {
     return (
