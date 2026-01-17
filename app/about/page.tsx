@@ -1,4 +1,3 @@
-
 import TerminalCard from "@/components/TerminalCard";
 
 export default function AboutPage() {
