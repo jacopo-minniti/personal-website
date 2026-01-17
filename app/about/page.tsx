@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import TerminalCard from "@/components/TerminalCard";
 
 export default function AboutPage() {

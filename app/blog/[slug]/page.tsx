@@ -8,7 +8,7 @@ import Image from 'next/image';
 import 'katex/dist/katex.min.css'; // Latex styles
 
 // Components for MDX
-import Link from 'next/link';
+
 
 // Components for MDX
 import TerminalCard from '@/components/TerminalCard';
