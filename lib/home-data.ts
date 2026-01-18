@@ -29,7 +29,7 @@ export const bioData = {
     ],
     contact: {
         email: "[EMAIL_ADDRESS]",
-        display: "jacopo.minniti004 [dot] gmail [dot] com"
+        display: "jacopo.minniti004 [at] gmail [dot] com"
     }
 };
 
