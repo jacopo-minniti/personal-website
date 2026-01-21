@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import TerminalCard from "@/components/TerminalCard";
 import NewsBoard from "@/components/NewsBoard";
 import { QuotesBox, GalleryViewer } from "@/components/HomeWidgets";
@@ -57,8 +58,18 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className="max-w-5xl mx-auto w-full mt-12 text-center text-xs text-muted font-mono opacity-50">
-        <p>© {new Date().getFullYear()} Jacopo Minniti. All Rights Reserved.</p>
+      {/* Footer */}
+      <footer className="max-w-5xl mx-auto w-full mt-12 text-center text-xs text-muted font-mono opacity-80">
+        <div className="mb-4 flex flex-col gap-2">
+          <p className="opacity-70">Visit other pages:</p>
+          <div className="flex justify-center gap-4 text-sm">
+            <Link href="/research" className="hover:text-[var(--pastel-orange)] transition-colors">./research</Link>
+            <Link href="/blog" className="hover:text-[var(--pastel-orange)] transition-colors">./blog</Link>
+            <Link href="/projects" className="hover:text-[var(--pastel-orange)] transition-colors">./projects</Link>
+            <Link href="/about" className="hover:text-[var(--pastel-orange)] transition-colors">./about</Link>
+          </div>
+        </div>
+        <p className="opacity-50">© {new Date().getFullYear()} Jacopo Minniti. All Rights Reserved.</p>
       </footer>
 
     </div>

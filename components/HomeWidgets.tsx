@@ -61,11 +61,11 @@ export function GalleryViewer() {
                 </div>
 
                 {/* Controls Overlay */}
-                <div className="absolute inset-0 flex items-center justify-between p-4 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-                    <button onClick={prev} className="bg-black/50 hover:bg-[var(--pastel-orange)] text-white hover:text-black p-2 rounded-full w-10 h-10 flex items-center justify-center font-mono font-bold transition-all hover:scale-110 active:scale-95 shadow-lg">
+                <div className="absolute inset-0 flex items-center justify-between p-4 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity z-30 pointer-events-none">
+                    <button onClick={prev} className="pointer-events-auto bg-black/50 hover:bg-[var(--pastel-orange)] text-white hover:text-black p-4 md:p-2 rounded-full w-12 h-12 md:w-10 md:h-10 flex items-center justify-center font-mono font-bold transition-all hover:scale-110 active:scale-95 shadow-lg backdrop-blur-sm border border-white/10">
                         &lt;
                     </button>
-                    <button onClick={next} className="bg-black/50 hover:bg-[var(--pastel-orange)] text-white hover:text-black p-2 rounded-full w-10 h-10 flex items-center justify-center font-mono font-bold transition-all hover:scale-110 active:scale-95 shadow-lg">
+                    <button onClick={next} className="pointer-events-auto bg-black/50 hover:bg-[var(--pastel-orange)] text-white hover:text-black p-4 md:p-2 rounded-full w-12 h-12 md:w-10 md:h-10 flex items-center justify-center font-mono font-bold transition-all hover:scale-110 active:scale-95 shadow-lg backdrop-blur-sm border border-white/10">
                         &gt;
                     </button>
                 </div>
