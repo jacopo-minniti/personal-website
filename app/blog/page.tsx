@@ -3,7 +3,17 @@ import ScrollableBlogList from './ScrollableBlogList';
 
 export default function BlogPage() {
   const posts = getSortedPostsData();
-  const allTags = ["AI", "neuroscience", "mathematics", "philosophy", "novel", "poetry"];
+  const allTags = [
+    "AI",
+    "reasoning",
+    "interpretability",
+    "neuroscience",
+    "mathematics",
+    "philosophy",
+    "novel",
+    "society",
+    "poetry"
+  ];
 
   return (
     <div className="min-h-screen py-10 px-6 max-w-7xl mx-auto">

@@ -20,7 +20,7 @@ export function getSortedPostsData(): PostData[] {
         return [];
     }
 
-    const fileNames = fs.readdirSync(postsDirectory);
+    const fileNames = fs.readdirSync(postsDirectory).filter(fileName => fileName.endsWith('.mdx'));
     const allPostsData = fileNames.map((fileName) => {
         const id = fileName.replace(/\.mdx$/, '');
 
