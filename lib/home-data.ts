@@ -18,14 +18,11 @@ export const galleryImages = [
 export const bioData = {
     name: "Jacopo Minniti",
     subtitle: "Undergraduate Student // AI Researcher",
-    messages: [
-        "Hello! I am passionate about exploring Neuro inspired deep learning models, mathematical foundations of AI, and much more.",
-        "I am currently a student at Minerva University (San Francisco, USA) but I grew up in Italy. I am part of an international program so I have the opportunity to travel around the world while studying.",
-        "I strive to keep learning and continuously become the best version of myself."
-    ],
+    bioText: "Hello! I am passionate about exploring neuro-inspired deep learning models, mathematical foundations of AI, and much more.\n\nI am currently a student at Minerva University but I grew up in Italy. I am part of an international program so I have the opportunity to travel around the world while studying.\n\nI am extremely grateful to my research mentors for their guidance and support. I am currently working with [Prof. Tim Rudner (UToronto)](https://timrudner.com/), [Neil Band (Stanford)](https://nband.github.io/), and I will soon be starting a research project under the guidance of [Dr. Richard Sproat (Sakana AI)](https://rws.xoba.com/)\n\nI strive to keep learning and continuously become the best version of myself.",
     affiliations: [
-        { name: "Minerva University", url: "https://www.minerva.edu", colorClass: "bg-white/10 hover:bg-white/20 border-white/20" },
-        { name: "XLab (UChicago)", url: "https://xrisk.uchicago.edu/", colorClass: "bg-[var(--pastel-red)]/10 hover:bg-[var(--pastel-red)]/20 border-[var(--pastel-red)]/20 text-[var(--pastel-red)]" }
+        { name: "Minerva University", url: "https://www.minerva.edu", colorClass: "bg-[var(--pastel-blue)]/10 hover:bg-[var(--pastel-blue)]/20 border-[var(--pastel-blue)]/20 text-[var(--pastel-blue)]" },
+        { name: "XLab (UChicago)", url: "https://xrisk.uchicago.edu/", colorClass: "bg-[var(--pastel-red)]/10 hover:bg-[var(--pastel-red)]/20 border-[var(--pastel-red)]/20 text-[var(--pastel-red)]" },
+        { name: "BLP (NTU)", url: "https://sites.google.com/view/ntublplab/home?authuser=0", colorClass: "bg-[var(--pastel-green)]/10 hover:bg-[var(--pastel-green)]/20 border-[var(--pastel-green)]/20 text-[var(--pastel-green)]" }
     ],
     contact: {
         email: "[EMAIL_ADDRESS]",
