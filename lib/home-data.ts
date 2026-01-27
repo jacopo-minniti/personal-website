@@ -22,7 +22,7 @@ export const bioData = {
     affiliations: [
         { name: "Minerva University", url: "https://www.minerva.edu", colorClass: "bg-[var(--pastel-blue)]/10 hover:bg-[var(--pastel-blue)]/20 border-[var(--pastel-blue)]/20 text-[var(--pastel-blue)]" },
         { name: "XLab (UChicago)", url: "https://xrisk.uchicago.edu/", colorClass: "bg-[var(--pastel-red)]/10 hover:bg-[var(--pastel-red)]/20 border-[var(--pastel-red)]/20 text-[var(--pastel-red)]" },
-        { name: "BLP (NTU)", url: "https://sites.google.com/view/ntublplab/home?authuser=0", colorClass: "bg-[var(--pastel-green)]/10 hover:bg-[var(--pastel-green)]/20 border-[var(--pastel-green)]/20 text-[var(--pastel-green)]" }
+        { name: "BLP Lab (NTU)", url: "https://sites.google.com/view/ntublplab/home?authuser=0", colorClass: "bg-[var(--pastel-green)]/10 hover:bg-[var(--pastel-green)]/20 border-[var(--pastel-green)]/20 text-[var(--pastel-green)]" }
     ],
     contact: {
         email: "[EMAIL_ADDRESS]",
