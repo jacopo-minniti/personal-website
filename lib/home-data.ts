@@ -6,10 +6,10 @@ export const quotes = [
 ];
 
 export const galleryImages = [
+    { path: "/gallery_viewer/llama.JPG", description: "LLamaaaaaas" },
     { path: "/gallery_viewer/gallery1.jpeg", description: "How can such a damned place like Calabria be so beatiful?" },
     { path: "/gallery_viewer/gallery2.jpeg", description: "Patagonia is Earth+" },
-    { path: "/gallery_viewer/gallery3.jpeg", description: "Why US universities have such pretty gardens?" },
-    { path: "/gallery_viewer/gallery4.JPG", description: "Spot the differences..." }
+    { path: "/gallery_viewer/gallery4.JPG", description: "Spot the differences..." },
     // Add more images here. 
     // Simply place your images in the /public/gallery_viewer folder at the root of the project
     // and reference them here like: "/gallery_viewer/your-image-name.jpg"
@@ -17,12 +17,14 @@ export const galleryImages = [
 
 export const bioData = {
     name: "Jacopo Minniti",
-    subtitle: "Undergraduate Student // AI Researcher",
-    bioText: "Hello! I am passionate about neuro-inspired deep learning models and the mathematical foundations of AI.\n\nI am currently a student at Minerva University. I grew up in Italy and am part of an international program that allows me to study while traveling around the world.\n\nI am extremely grateful to my research mentors for their guidance and support. I am currently working with [Prof. Tim G. J. Rudner (UToronto)](https://timrudner.com/) and [Neil Band (Stanford)](https://nband.github.io/) on Process Reward Models in LLMs. I will soon be starting a research project under the guidance of [Dr. Richard Sproat (Sakana AI)](https://rws.xoba.com/) on the geometry of representations in language models.\n\nI strive to keep learning and continuously become the best version of myself.",
+    subtitle: "Undergraduate Student // Junior AI Researcher",
+    bioText: "Hello! I am passionate about neuro-inspired deep learning models and the mathematical foundations of AI.\n\nI am currently a student at Minerva University and research assistant at University of Toronto. I grew up in Italy and am part of an international program that allows me to study while traveling around the world.\n\nI am extremely grateful to my research mentors for their guidance and support. I am currently working with [Prof. Tim G. J. Rudner (UToronto)](https://timrudner.com/) and [Neil Band (Stanford)](https://nband.github.io/) on Process Reward Models in LLMs. I will soon be starting a research project under the guidance of [Dr. Richard Sproat (Sakana AI)](https://rws.xoba.com/) on the geometry of representations in language models.\n\nI strive to keep learning and continuously become the best version of myself.",
     affiliations: [
-        { name: "Minerva University", url: "https://www.minerva.edu", colorClass: "bg-[var(--pastel-blue)]/10 hover:bg-[var(--pastel-blue)]/20 border-[var(--pastel-blue)]/20 text-[var(--pastel-blue)]" },
-        { name: "XLab (UChicago)", url: "https://xrisk.uchicago.edu/", colorClass: "bg-[var(--pastel-red)]/10 hover:bg-[var(--pastel-red)]/20 border-[var(--pastel-red)]/20 text-[var(--pastel-red)]" },
-        { name: "BLP Lab (NTU)", url: "https://sites.google.com/view/ntublplab/home?authuser=0", colorClass: "bg-[var(--pastel-green)]/10 hover:bg-[var(--pastel-green)]/20 border-[var(--pastel-green)]/20 text-[var(--pastel-green)]" }
+        { name: "Sakana AI", url: "https://sakana.ai/", colorClass: "bg-[var(--pastel-purple)]/10 hover:bg-[var(--pastel-purple)]/20 border-[var(--pastel-purple)]/20 text-[var(--pastel-purple)]" },
+        { name: "University of Toronto", url: "https://www.utoronto.ca/", colorClass: "bg-[var(--pastel-blue)]/10 hover:bg-[var(--pastel-blue)]/20 border-[var(--pastel-blue)]/20 text-[var(--pastel-blue)]" },
+        { name: "XLab (University of Chicago)", url: "https://xrisk.uchicago.edu/", colorClass: "bg-[var(--pastel-red)]/10 hover:bg-[var(--pastel-red)]/20 border-[var(--pastel-red)]/20 text-[var(--pastel-red)]" },
+        { name: "BLP Lab (NTU)", url: "https://sites.google.com/view/ntublplab/home?authuser=0", colorClass: "bg-[var(--pastel-green)]/10 hover:bg-[var(--pastel-green)]/20 border-[var(--pastel-green)]/20 text-[var(--pastel-green)]" },
+        { name: "Minerva University", url: "https://www.minerva.edu", colorClass: "bg-[var(--pastel-orange)]/10 hover:bg-[var(--pastel-orange)]/20 border-[var(--pastel-orange)]/20 text-[var(--pastel-orange)]" }
     ],
     contact: {
         email: "[EMAIL_ADDRESS]",
@@ -31,6 +33,11 @@ export const bioData = {
 };
 
 export const newsItems = [
+    {
+        date: "2026-01-23",
+        title: "Joining Sakana AI as Summer Research Intern",
+        content: "I am very happy to announce I will be working with the bright researchers at Sakana for a 4 months-long internship on the topic 'interpreting the geometries of representations caused by gradient descent and how to steer them to improve the generalization of models'."
+    },
     {
         date: "2025-08-15",
         title: "Talk at University of Chicago: 'The (not so) bitter lesson'",

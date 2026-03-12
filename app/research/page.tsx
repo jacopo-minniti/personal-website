@@ -24,10 +24,11 @@ const papers: Paper[] = [
     title: "Challenges in Inference-Time Scaling with Uncertainty-Aware Tree Search",
     journal: "",
     authors: ["Minniti, J.", "Band, N.", "Rudner, T. G. J."],
-    conference: "ICLR [Under Review]",
+    conference: "ICLR",
     year: "2026",
     abstract: "Inference-time search has emerged as a powerful paradigm for scaling the reasoning capabilities of large language models. Standard approaches, such as beam search, rely on process reward models (PRMs) to provide dense, step-by-step scoring to identify promising reasoning paths. However, scaling these methods results in a known failure mode: as compute budgets increase, the search algorithm encounters out-of-distribution states that are spuriously assigned high value, decoupling the proxy reward from actual reasoning ability.  To address this issue, we propose Uncertainty-Aware Tree Search (UATS). Rather than relying solely on PRM value estimates, UATS uses a process uncertainty model (PUM) to predict when the value model's predictions are likely unreliable. UATS uses PUM predictions to dynamically allocate computational resources, increasing the branching factor at high-uncertainty nodes to resolve ambiguity through exploration.  In our empirical evaluation, we find that while PUMs perform well on held-out in-distribution data, strong in-distribution generalization does not translate into improved downstream inference-time uncertainty-guided search. On instruction-tuned models, UATS matches standard beam search, whereas when applied to reasoning models, it consistently and counterintuitively degrades performance as inference-time compute grows. This failure is an instructive negative result, as it suggests that the search-induced distribution shift that leads to poor generalization for PRMs also leads to poor generalization for process uncertainty models. Our results demonstrate that uncertainty-guided inference-time scaling requires robust process uncertainty models that remain reliable under search-induced distribution shift.",
     keywords: ["Uncertainty Quantification", "Reasoning Scaling", "LLMs"],
+    preprintUrl: "https://",
   },
   {
     id: "p2",
