@@ -22,7 +22,7 @@ export default function AboutPage() {
                         I study <strong>mathematics and artificial intelligence</strong>, with a minor in neuroscience.
                         If you are interested, you can take a look at my{" "}
                         <a
-                            href="https://drive.google.com/file/d/1r7TAeg30KsetqnaM2VtkKiHJHh1UwSga/view?usp=sharing"
+                            href="https://drive.google.com/file/d/17pEOY3JpCguwYWydySNgo_g2k-DW8fpU/view?usp=sharing"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="underline decoration-[var(--pastel-orange)] hover:text-foreground transition-colors"
