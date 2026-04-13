@@ -34,6 +34,11 @@ export const bioData = {
 
 export const newsItems = [
     {
+        date: "2026-03-02",
+        title: "Paper accepted at ICLR 2026",
+        content: "I am very happy to announce our paper 'Challenges in Inference Time Scaling with Uncertainty Aware Tree Search' has been accepted at multiple ICLR 2026 workshops, including SPOT and Agentic AI in the Wild. We investigate how process uncertainty models (PUMs) interact with process reward models (PRMs) during inference-time search. We introduce Uncertainty-Aware Tree Search (UATS), which dynamically allocates search compute based on predicted uncertainty in reasoning steps."
+    },
+    {
         date: "2026-01-23",
         title: "Joining Sakana AI as Summer Research Intern",
         content: "I am very happy to announce I will be working with the bright researchers at Sakana for a 4 months-long internship on the topic 'interpreting the geometries of representations caused by gradient descent and how to steer them to improve the generalization of models'."
