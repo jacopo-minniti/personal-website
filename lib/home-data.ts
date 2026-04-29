@@ -27,7 +27,7 @@ export const bioData = {
         { name: "Minerva University", url: "https://www.minerva.edu", colorClass: "bg-[var(--pastel-orange)]/10 hover:bg-[var(--pastel-orange)]/20 border-[var(--pastel-orange)]/20 text-[var(--pastel-orange)]" }
     ],
     contact: {
-        email: "[EMAIL_ADDRESS]",
+        email: "jacopo.minniti004@gmail.com",
         display: "jacopo.minniti004 [at] gmail [dot] com"
     }
 };
