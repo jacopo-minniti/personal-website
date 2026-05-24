@@ -16,7 +16,7 @@ export default function AboutPage() {
                         <strong>Research</strong> is the one thing I could not imagine living without. It is what I think about when I wake up and what stays with me at night.
                         I was drawn to <span className="text-foreground font-bold">machine learning</span> as a teenager, and since then my focus has been on understanding intelligence from first principles.
                         My main intellectual interest is developing a <strong>rigorous mathematical theory of intelligence</strong>, one that helps us understand ourselves through machines and improve machines through a deeper understanding of natural minds.
-                        I really like the term "learning mechanics" to describe this new perspective on machine learning.
+                        I really like the term &quot;learning mechanics&quot; to describe this new perspective on machine learning.
                     </p>
 
                     <p>
