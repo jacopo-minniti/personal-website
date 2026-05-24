@@ -16,13 +16,14 @@ export default function AboutPage() {
                         <strong>Research</strong> is the one thing I could not imagine living without. It is what I think about when I wake up and what stays with me at night.
                         I was drawn to <span className="text-foreground font-bold">machine learning</span> as a teenager, and since then my focus has been on understanding intelligence from first principles.
                         My main intellectual interest is developing a <strong>rigorous mathematical theory of intelligence</strong>, one that helps us understand ourselves through machines and improve machines through a deeper understanding of natural minds.
+                        I really like the term "learning mechanics" to describe this new perspective on machine learning.
                     </p>
 
                     <p>
-                        I study <strong>mathematics and artificial intelligence</strong>, with a minor in neuroscience.
+                        I study <strong>mathematics and artificial intelligence</strong>.
                         If you are interested, you can take a look at my{" "}
                         <a
-                            href="https://drive.google.com/file/d/17pEOY3JpCguwYWydySNgo_g2k-DW8fpU/view?usp=sharing"
+                            href="https://drive.google.com/file/d/18BcaIGrLxANv2CzTpjFBliIpfp9AGT3e/view?usp=sharing"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="underline decoration-[var(--pastel-orange)] hover:text-foreground transition-colors"
@@ -32,7 +33,8 @@ export default function AboutPage() {
                     </p>
 
                     <p>
-                        Beyond AI and math, my interests are broad. In general, I deeply believe in the power of reason and in a formal analysis of the world.
+                        I try to approach every aspect of my life with the same curiosity and rigor.
+                        I firmly believe in the power of reason and in a formal analysis of the world.
                         There is a quote by the Italian writer Calvino that roughly says:
                     </p>
 
