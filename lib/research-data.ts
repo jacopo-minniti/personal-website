@@ -14,6 +14,22 @@ export interface Paper {
 
 export const papers: Paper[] = [
   {
+    id: "p3",
+    title: "Learned Relay Representations for Forward-Thinking Discrete Diffusion Models",
+    authors: ["Rozonoyer, B.", "Minniti, J.", "Patel, D.", "Band, N.", "Bose, A. J.", "Rudner, T. G. J.", "McCallum, A."],
+    journal: "arXiv preprint arXiv:2605.22967",
+    year: "2026",
+    abstract: "When Masked Diffusion Models (MDMs) generate sequences through iterative refinement, the rich internal computation over masked positions is discarded, forcing every subsequent refinement step to recompute the valuable internal information stored as model representations. To avoid a hard reset between denoising rounds, we propose Learned Relay Representations (Relay), a method that allows MDMs to be forward-thinking when denoising by explicitly learning how to propagate latent information for the benefit of future denoising steps. Relay introduces a differentiable per-token channel that passes information between forward passes and is trained via truncated backpropagation through time (BPTT). We show that this framework can be scaled to state-of-the-art Diffusion Language Models (DLMs), and is seamlessly compatible with techniques like block diffusion and KV caching. We first provide a thorough justification of the design choices in Relay on a challenging Sudoku-based planning task. We then scale Relay to Fast-dLLM v2, a state-of-the-art DLM, outperforming standard supervised finetuning on coding tasks while reducing inference latency by up to 32%. Our empirical results demonstrate that state-of-the-art DLMs can be explicitly trained to relay latent information forward across decoding steps, advancing the performance-latency Pareto frontier. We provide code for all our experiments.",
+    keywords: ["Discrete Diffusion", "Diffusion Language Models", "Latent Representations"],
+    link: "https://arxiv.org/abs/2605.22967",
+    bibtex: `@article{rozonoyer2026learned,
+  title={Learned Relay Representations for Forward-Thinking Discrete Diffusion Models},
+  author={Rozonoyer, Benjamin and Minniti, Jacopo and Patel, Dhruvesh and Band, Neil and Bose, Avishek Joey and Rudner, Tim GJ and McCallum, Andrew},
+  journal={arXiv preprint arXiv:2605.22967},
+  year={2026}
+}`,
+  },
+  {
     id: "p1",
     title: "Challenges in Inference-Time Scaling with Uncertainty-Aware Tree Search",
     journal: "",
