@@ -61,7 +61,7 @@ function SyntaxHighlighter({ code }: { code: string }) {
     };
 
     return (
-        <pre className="font-mono text-xs overflow-x-auto leading-relaxed text-white/90">
+        <pre className="font-mono text-xs overflow-x-hidden whitespace-pre-wrap break-words leading-relaxed text-white/90">
             <code>
                 {lines.map((line, i) => processLine(line, i))}
             </code>
@@ -76,29 +76,14 @@ export default function ResearchInterests() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
 
                     {/* Left Column: Code Blocks */}
-                    <div className="space-y-8">
+                    <div className="space-y-12">
                         {researchInterests.codeSnippets.map((snippet, idx) => (
                             <div key={idx} className="group">
-                                <div className="flex items-center justify-between border-b border-white/10 pb-2 mb-3">
-                                    <span className="text-[var(--pastel-blue)] font-bold text-xs">{snippet.label}</span>
-                                    {/* Removed 'python' text as requested */}
-                                </div>
-                                <div className="pl-2 border-l-2 border-white/10 group-hover:border-[var(--pastel-orange)] transition-colors">
+                                <div className="pl-2">
                                     <SyntaxHighlighter code={snippet.code} />
                                 </div>
                             </div>
                         ))}
-                    </div>
-
-                    {/* Right Column: Docstring & Tech Stack */}
-                    <div className="space-y-6 flex flex-col h-full">
-
-                        {/* Docstring */}
-                        <div className="flex-1">
-                            <div className="text-[var(--pastel-green)] leading-relaxed whitespace-pre-wrap font-mono text-sm opacity-90">
-                                {researchInterests.explanation}
-                            </div>
-                        </div>
 
                         {/* Tech Stack */}
                         <div className="mt-4 pt-6 border-t border-white/5">
@@ -111,6 +96,17 @@ export default function ResearchInterests() {
                                         {tech}
                                     </span>
                                 ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Right Column: Docstring */}
+                    <div className="flex flex-col h-full">
+
+                        {/* Docstring */}
+                        <div className="flex-1">
+                            <div className="text-[var(--pastel-green)] leading-relaxed whitespace-pre-wrap font-mono text-sm opacity-90">
+                                {researchInterests.explanation}
                             </div>
                         </div>
 

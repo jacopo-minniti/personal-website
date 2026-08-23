@@ -57,7 +57,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between font-mono">
+      <div className="max-w-7xl mx-auto px-6 h-[4.5rem] flex items-center justify-between font-mono">
 
         {/* Left Section: Burger (Mobile) + Logo */}
         <div className="flex items-center gap-4">
@@ -72,7 +72,7 @@ export default function Navbar() {
 
           {/* Logo Section */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-8 h-8">
+            <div className="relative w-9 h-9">
               <Image
                 src="/logo_navbar.png"
                 alt="Logo"
@@ -127,7 +127,7 @@ export default function Navbar() {
                 className="text-muted hover:text-[var(--pastel-orange)] transition-colors"
                 aria-label={link.label}
               >
-                <link.icon size={18} />
+                <link.icon size={19} />
               </a>
             ))}
           </div>

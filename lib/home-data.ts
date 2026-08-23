@@ -18,7 +18,7 @@ export const galleryImages = [
 export const bioData = {
     name: "Jacopo Minniti",
     subtitle: "Undergraduate Student // Junior AI Researcher",
-    bioText: "Hello! I am passionate about neuro-inspired deep learning models and the mathematical foundations of AI.\n\nI am currently a student at Minerva University and research assistant at University of Toronto. I grew up in Italy and am part of an international program that allows me to study while traveling around the world.\n\nI am extremely grateful to my research mentors for their guidance and support. I am currently working with [Prof. Tim G. J. Rudner (UToronto)](https://timrudner.com/) and [Neil Band (Stanford)](https://nband.github.io/) on Process Reward Models in LLMs. I will soon be starting a research project under the guidance of [Dr. Richard Sproat (Sakana AI)](https://rws.xoba.com/) on the geometry of representations in language models.\n\nI strive to keep learning and continuously become the best version of myself.",
+    bioText: "Hello! I’m passionate about statistical-physics approaches to deep learning and neuro-inspired models. My long-term goal is to help make theoretical and mathematical approaches to AI powerful enough to contribute directly to frontier capabilities research.\n\n I’m currently pursuing a bachelor’s degree at Minerva University. I work as a research assistant at the University of Toronto under [Tim G. J. Rudner](https://timrudner.com/), where I study diffusion models for language, and I’m also a Member of Technical Staff at Sakana AI under [Richard Sproat](https://rws.xoba.com/).\n\n I want to spend my life at the edge of what I understand, always moving it a little further.",
     affiliations: [
         { name: "Sakana AI", url: "https://sakana.ai/", colorClass: "bg-[var(--pastel-purple)]/10 hover:bg-[var(--pastel-purple)]/20 border-[var(--pastel-purple)]/20 text-[var(--pastel-purple)]" },
         { name: "University of Toronto", url: "https://www.utoronto.ca/", colorClass: "bg-[var(--pastel-blue)]/10 hover:bg-[var(--pastel-blue)]/20 border-[var(--pastel-blue)]/20 text-[var(--pastel-blue)]" },
@@ -33,6 +33,11 @@ export const bioData = {
 };
 
 export const newsItems = [
+    {
+        date: "2026-08-17",
+        title: "Accepted at School of Analytical Connectionism 2026",
+        content: "I’m participating in the 2026 School on Analytical Connectionism in Gothenburg, bringing together statistical physics, ML, neuroscience, and cognitive science to study neural networks more theoretically. If you’re around (or simply interested in this kind of approach) reach out!"
+    },
     {
         date: "2026-03-02",
         title: "Paper accepted at ICLR 2026",
@@ -54,7 +59,6 @@ export const newsItems = [
 export const researchInterests = {
     codeSnippets: [
         {
-            label: "neuro_ai.py",
             language: "python",
             code: `class NeuroAI(nn.Module):
     def __init__(self):
@@ -67,52 +71,30 @@ export const researchInterests = {
         return self.plasticity(self.synapses(x))`
         },
         {
-            label: "math_foundations.py",
             language: "python",
-            code: `def prove_generalization(network):
-    # Deriving bounds on sample complexity
-    bound = vcdim(network) + log(1/delta)
-    stability = spectral_norm(network.weights)
-    
-    # Toward a theory of intelligence
-    return verify_convergence(bound, stability)`
+            code: `class StatisticalPhysics:
+    def find_order_parameters(self, network):
+        # Compressing high-dimensional learning dynamics
+        state = measure_network_state(network)
+        order_parameters = identify_macroscopic_variables(state)
+        
+        # Toward a statistical theory of intelligence
+        return characterize_phases(order_parameters)`
         },
         {
-            label: "mech_interp.py",
             language: "python",
-            code: `def analyze_representations(model):
-    """Decoding internal states"""
-    activations = run_with_hooks(model)
-    circuits = identify_circuits(activations)
-    return interpret_features(circuits)`
+            code: `class MechanisticInterpretability:
+    def analyze_representations(self, model):
+        """Decoding internal states"""
+        activations = run_with_hooks(model)
+        circuits = identify_circuits(activations)
+        return interpret_features(circuits)`
         },
-        {
-            label: "reasoning_training.py",
-            language: "python",
-            code: `optimizer = torch.optim.AdamW(agent.parameters())
-
-for step in range(max_steps):
-    # Train strictly for long-horizon planning
-    thought_chain = agent.think(problem)
-    action = agent.decide(thought_chain)
-    
-    reward = env.step(action)
-    loss = -log_prob(action) * reward
-    loss.backward()`
-        }
     ],
     explanation: `'''
-RESEARCH INTERESTS & PHILOSOPHY
+<<< RESEARCH INTERESTS & PHILOSOPHY >>>
 
-I am exploring the convergence of biological intelligence and artificial systems. 
-
-My primary focus is on:
-1. NeuroAI: Implementing biological constraints (plasticity, sparsity) to create more robust and efficient learning systems.
-2. Mathematical Foundations: Developing a rigorous mathematical theory of intelligence to understand generalization and stability.
-3. Mechanistic Interpretability: Reverse-engineering model weights to understand how high-level reasoning emerges from low-level circuits.
-4. Agentic Reasoning: Training models to think, plan, and verify their own chain of thought over long time horizons.
-
-I believe true intelligence requires both structure (neuro-inspired architectures) and rigorous understanding (interpretability).
+Much of deep learning’s history has been driven by intuition rather than a precise account of why its systems work. Theory has often followed capabilities research as post hoc analysis; the aim instead is to develop a mathematical theory of intelligence that can guide more powerful frontier models.\n\nStatistical physics offers one promising direction. Deep-learning models are enormous and highly nonlinear, yet meaningful order parameters may reveal macroscopic phases, transitions, and learning dynamics that classical theory has difficulty capturing.\n\nA second direction comes from neuro-inspired models—not because human cognition is the only route to intelligence, but because human learning is remarkably efficient. Identifying the mechanisms behind that efficiency, and which aspects of neural organization matter, could lead to more capable and efficient artificial systems.\n\nMechanistic interpretability provides a complementary bridge: connecting internal representations and circuits to these principles may turn empirical observations into a more coherent theory.
 '''`,
     stack: {
         command: "ls -a active_stack",

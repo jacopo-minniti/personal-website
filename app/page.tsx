@@ -15,7 +15,7 @@ export default function Home() {
 
         {/* Profile Card */}
         <div className="md:col-span-4 flex">
-          <TerminalCard title="user_profile.jpg" className="h-full">
+          <TerminalCard title="profile_pic.jpg" className="h-full">
             <div className="relative w-full h-full flex-1 p-24">
               <Image
                 src="/profile.jpg"
