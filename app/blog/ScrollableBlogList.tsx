@@ -83,7 +83,7 @@ export default function ScrollableBlogList({ posts, allTags }: ScrollableBlogLis
             </div>
 
             {/* Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                 {filteredPosts.map(post => {
                     // Random rainbow color for the $ sign per post (deterministic by ID)
                     const dollarColors = ['text-[var(--pastel-red)]', 'text-[var(--pastel-green)]', 'text-[var(--pastel-blue)]', 'text-[var(--pastel-purple)]', 'text-[var(--pastel-yellow)]'];
@@ -93,18 +93,18 @@ export default function ScrollableBlogList({ posts, allTags }: ScrollableBlogLis
                         <TerminalCard key={post.id} className="group hover:-translate-y-1 transition-transform duration-300 h-full flex flex-col" title="">
                             {/* Custom Title Bar content manually injected to allow rainbow $ */}
                             <div className="border-b border-border px-4 py-2 bg-white/5 flex items-center justify-between">
-                                <span className="font-bold text-sm text-foreground/80 lowercase font-mono">
-                                    <span className={dollarColor}>$</span> cat {post.id}.md
-                                </span>
                                 <div className="flex gap-2">
                                     <div className="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e]"></div>
                                     <div className="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123]"></div>
                                     <div className="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29]"></div>
                                 </div>
+                                <span className="font-bold text-sm text-foreground/80 lowercase font-mono">
+                                    <span className={dollarColor}>$</span> cat {post.id}.md
+                                </span>
                             </div>
 
                             <Link href={`/blog/${post.id}`} className="block h-full flex flex-col">
-                                <div className="relative h-48 w-full border-b border-border overflow-hidden">
+                                <div className="relative aspect-[16/9] w-full border-b border-border overflow-hidden">
                                     <Image
                                         src={post.thumbnail || '/background.jpg'}
                                         alt={post.title}

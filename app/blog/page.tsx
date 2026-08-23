@@ -5,13 +5,11 @@ export default function BlogPage() {
   const posts = getSortedPostsData();
   const allTags = [
     "AI",
-    "reasoning",
+    "math",
+    "diffusion",
     "interpretability",
-    "neuroscience",
-    "mathematics",
     "philosophy",
     "novel",
-    "society",
     "poetry"
   ];
 
@@ -20,7 +18,7 @@ export default function BlogPage() {
       <header className="mb-12 text-center">
         <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">The Blog</h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Thoughts, stories, and explorations on AI and much more.
+          Thoughts, stories, and explorations on AI, philosophy, poetry and much more.
         </p>
       </header>
 

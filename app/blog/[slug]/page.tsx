@@ -172,11 +172,12 @@ export default async function BlogPost({ params }: Props) {
                     {/* Small Cute Window Box for Meta */}
                     <div className="border border-border bg-background p-4 shadow-md">
                         <div className="text-xs font-mono text-muted mb-4 border-b border-border pb-2 flex justify-between">
-                            <span>metadata.json</span>
                             <div className="flex gap-1">
                                 <span className="w-2 h-2 rounded-full bg-border"></span>
                                 <span className="w-2 h-2 rounded-full bg-border"></span>
+                                <span className="w-2 h-2 rounded-full bg-border"></span>
                             </div>
+                            <span>metadata.json</span>
                         </div>
 
                         <div className="flex flex-wrap gap-2 mb-4">

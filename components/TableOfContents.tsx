@@ -59,11 +59,12 @@ export default function TableOfContents() {
     return (
         <div className="border border-border bg-background p-4 shadow-md">
             <div className="text-xs font-mono text-muted mb-4 border-b border-border pb-2 flex justify-between">
-                <span>outline.txt</span>
                 <div className="flex gap-1">
                     <span className="w-2 h-2 rounded-full bg-border"></span>
                     <span className="w-2 h-2 rounded-full bg-border"></span>
+                    <span className="w-2 h-2 rounded-full bg-border"></span>
                 </div>
+                <span>outline.txt</span>
             </div>
 
             <nav className="space-y-2">

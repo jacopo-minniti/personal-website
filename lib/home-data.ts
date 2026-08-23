@@ -92,7 +92,7 @@ export const researchInterests = {
         },
     ],
     explanation: `'''
-<<< RESEARCH INTERESTS & PHILOSOPHY >>>
+<<< RESEARCH PROGRAM >>>
 
 Much of deep learning’s history has been driven by intuition rather than a precise account of why its systems work. Theory has often followed capabilities research as post hoc analysis; the aim instead is to develop a mathematical theory of intelligence that can guide more powerful frontier models.\n\nStatistical physics offers one promising direction. Deep-learning models are enormous and highly nonlinear, yet meaningful order parameters may reveal macroscopic phases, transitions, and learning dynamics that classical theory has difficulty capturing.\n\nA second direction comes from neuro-inspired models—not because human cognition is the only route to intelligence, but because human learning is remarkably efficient. Identifying the mechanisms behind that efficiency, and which aspects of neural organization matter, could lead to more capable and efficient artificial systems.\n\nMechanistic interpretability provides a complementary bridge: connecting internal representations and circuits to these principles may turn empirical observations into a more coherent theory.
 '''`,

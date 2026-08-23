@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { FaLinkedin, FaGithub, FaYoutube, FaBars, FaTimes } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaAddressCard, FaBars, FaTimes } from 'react-icons/fa';
 import { SiGooglescholar } from 'react-icons/si';
 
 export default function Navbar() {
@@ -29,7 +29,7 @@ export default function Navbar() {
     { icon: SiGooglescholar, href: "https://scholar.google.com/citations?user=35e-vPwAAAAJ&hl=en&oi=ao", label: "Google Scholar" },
     { icon: FaGithub, href: "https://github.com/jacopo-minniti", label: "GitHub" },
     { icon: FaLinkedin, href: "https://Linkedin.com/in/jacopo-minniti/", label: "LinkedIn" },
-    { icon: FaYoutube, href: "https://www.youtube.com/@jacopominniti7169", label: "YouTube" },
+    { icon: FaAddressCard, href: "https://drive.google.com/file/d/1N29jYoeXiVtk5ZHh58p_q3PFabiLWWQ2/view?usp=sharing", label: "Resume" },
   ];
 
   // Colors for nav items
@@ -57,7 +57,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
-      <div className="max-w-7xl mx-auto px-6 h-[4.5rem] flex items-center justify-between font-mono">
+      <div className="max-w-7xl mx-auto px-6 h-[4.75rem] flex items-center justify-between font-mono">
 
         {/* Left Section: Burger (Mobile) + Logo */}
         <div className="flex items-center gap-4">
