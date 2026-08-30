@@ -23,7 +23,7 @@ export default function AboutPage() {
                         I study <strong>mathematics and artificial intelligence</strong>.
                         If you are interested, you can take a look at my{" "}
                         <a
-                            href="/Resume.pdf"
+                            href="/resume.pdf"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="underline decoration-[var(--pastel-orange)] hover:text-foreground transition-colors"
