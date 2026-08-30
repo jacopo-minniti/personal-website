@@ -29,7 +29,7 @@ export default function Navbar() {
     { icon: SiGooglescholar, href: "https://scholar.google.com/citations?user=35e-vPwAAAAJ&hl=en&oi=ao", label: "Google Scholar" },
     { icon: FaGithub, href: "https://github.com/jacopo-minniti", label: "GitHub" },
     { icon: FaLinkedin, href: "https://Linkedin.com/in/jacopo-minniti/", label: "LinkedIn" },
-    { icon: FaAddressCard, href: "https://drive.google.com/file/d/1N29jYoeXiVtk5ZHh58p_q3PFabiLWWQ2/view?usp=sharing", label: "Resume" },
+    { icon: FaAddressCard, href: "/Resume.pdf", label: "Resume" },
   ];
 
   // Colors for nav items
