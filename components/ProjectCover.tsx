@@ -11,7 +11,7 @@ export default function ProjectCover({ compact = false }: ProjectCoverProps) {
       className={`relative overflow-hidden bg-[#070b10] ${compact ? 'aspect-[16/9] w-full' : 'h-full'}`}
     >
       <Image
-        src="/projects/convminds/cover.png"
+        src="/projects/convminds/cover.jpeg"
         alt=""
         fill
         priority={!compact}
