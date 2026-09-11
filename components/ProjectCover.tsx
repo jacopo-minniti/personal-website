@@ -15,7 +15,7 @@ export default function ProjectCover({ compact = false }: ProjectCoverProps) {
         alt=""
         fill
         priority={!compact}
-        className={`object-contain ${compact ? 'p-4' : 'p-5 md:p-8'}`}
+        className="object-cover"
         sizes={compact ? '(max-width: 768px) 100vw, 33vw' : '100vw'}
       />
     </div>
