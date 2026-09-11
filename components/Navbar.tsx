@@ -118,7 +118,7 @@ export default function Navbar() {
 
           {/* Socials - Visible on Mobile too */}
           <div className="flex items-center gap-4">
-            {socialLinks.map((link, idx) => (
+            {socialLinks.filter((link) => link.label !== 'Resume').map((link, idx) => (
               <a
                 key={idx}
                 href={link.href}
@@ -130,7 +130,30 @@ export default function Navbar() {
                 <link.icon size={19} />
               </a>
             ))}
+            {/* Preserve the compact icon-only resume link on mobile. */}
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="md:hidden text-muted hover:text-[var(--pastel-orange)] transition-colors"
+              aria-label="Resume"
+            >
+              <FaAddressCard size={19} />
+            </a>
           </div>
+
+          {/* Resume Divider */}
+          <div className="h-4 w-px bg-border hidden md:block"></div>
+
+          {/* Desktop Resume Link */}
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-flex items-center text-base font-semibold tracking-wide text-[var(--pastel-orange)] transition-colors hover:text-[var(--pastel-orange)]/80 hover:underline decoration-2 underline-offset-4"
+          >
+            resume
+          </a>
         </div>
       </div>
 
