@@ -114,12 +114,12 @@ export default async function BlogPost({ params }: Props) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
 
-                <div className="absolute bottom-12 left-6 md:left-12 max-w-4xl">
+                <div className="absolute bottom-12 left-1/2 w-full max-w-4xl -translate-x-1/2 px-6 text-center">
                     {/* Removed tags from here as requested */}
                     <h1 className="text-3xl md:text-5xl font-mono font-bold mb-2 text-white leading-tight shadow-black drop-shadow-md">
                         {post.title}
                     </h1>
-                    <div className="flex items-center gap-4 text-sm font-mono text-gray-400">
+                    <div className="flex items-center justify-center gap-4 text-sm font-mono text-gray-400">
                         <span>{new Date(post.date).toLocaleDateString(undefined, { dateStyle: 'long' })}</span>
                         <span className="w-1 h-1 bg-gray-500 rounded-full"></span>
                         <span>v1.0</span>
@@ -128,7 +128,7 @@ export default async function BlogPost({ params }: Props) {
             </div>
 
 
-            <div className="px-6 max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-12 relative">
+            <div className="px-6 max-w-[1500px] mx-auto flex flex-col lg:flex-row justify-center gap-12 relative">
                 {/* Left: Operations + Outline (Desktop) */}
                 <aside className="hidden lg:block w-40 flex-shrink-0 space-y-6">
                     <div>
@@ -143,7 +143,7 @@ export default async function BlogPost({ params }: Props) {
                 </aside>
 
                 {/* Main Content - Centered Box, Left Aligned Text */}
-                <main className="flex-1 max-w-2xl w-full">
+                <main className="flex-none max-w-3xl w-full mx-auto lg:mx-0">
 
                     {/* Article Body */}
                     <article className="relative prose prose-invert prose-headings:font-mono prose-p:font-mono prose-a:text-[var(--pastel-orange)] prose-img:border prose-img:border-border prose-pre:bg-[#0d1117] prose-pre:border prose-pre:border-border max-w-none text-left overflow-visible
