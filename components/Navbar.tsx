@@ -57,7 +57,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
-      <div className="max-w-7xl mx-auto px-6 h-[4.75rem] flex items-center justify-between font-mono">
+      <div className="max-w-[90rem] mx-auto px-6 h-[4.75rem] flex items-center justify-between font-mono">
 
         {/* Left Section: Burger (Mobile) + Logo */}
         <div className="flex items-center gap-4">
