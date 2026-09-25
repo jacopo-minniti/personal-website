@@ -14,17 +14,6 @@ interface ScrollableBlogListProps {
 export default function ScrollableBlogList({ posts, allTags }: ScrollableBlogListProps) {
     const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
-    // Strict order: AI, neuroscience, mathematics, philosophy, novel, poetry
-    // But we should use the tags passed in `allTags` but reordered.
-    const priorityOrder = ['AI', 'neuroscience', 'mathematics', 'philosophy', 'novel', 'poetry'];
-
-    // Filter and sort available tags based on priority
-    const displayTags = priorityOrder.filter(t => allTags.includes(t));
-    // Add any remaining tags that are not in the priority list at the end
-    const otherTags = allTags.filter(t => !priorityOrder.includes(t));
-    const finalTags = [...displayTags, ...otherTags];
-
-
     const filteredPosts = selectedTag
         ? posts.filter(post => post.tags.includes(selectedTag))
         : posts;
@@ -60,7 +49,7 @@ export default function ScrollableBlogList({ posts, allTags }: ScrollableBlogLis
                 >
                     [All]
                 </button>
-                {finalTags.map((tag) => {
+                {allTags.map((tag) => {
                     const colorClass = getTagColor(tag);
                     const isSelected = selectedTag === tag;
 

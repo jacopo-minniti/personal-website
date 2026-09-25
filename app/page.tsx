@@ -65,7 +65,6 @@ export default function Home() {
           <div className="flex justify-center gap-4 text-sm">
             <Link href="/research" className="hover:text-[var(--pastel-orange)] transition-colors">./research</Link>
             <Link href="/blog" className="hover:text-[var(--pastel-orange)] transition-colors">./blog</Link>
-            <Link href="/projects" className="hover:text-[var(--pastel-orange)] transition-colors">./projects</Link>
             <Link href="/about" className="hover:text-[var(--pastel-orange)] transition-colors">./about</Link>
           </div>
         </div>

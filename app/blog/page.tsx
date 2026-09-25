@@ -3,22 +3,15 @@ import ScrollableBlogList from './ScrollableBlogList';
 
 export default function BlogPage() {
   const posts = getSortedPostsData();
-  const allTags = [
-    "AI",
-    "math",
-    "diffusion",
-    "interpretability",
-    "philosophy",
-    "novel",
-    "poetry"
-  ];
+  const allTags = Array.from(new Set(posts.flatMap((post) => post.tags)))
+    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
 
   return (
     <div className="min-h-screen py-10 px-6 max-w-7xl mx-auto">
       <header className="mb-12 text-center">
-        <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">The Blog</h1>
+        <h1 className="text-4xl md:text-5xl font-serif font-bold mb-4">Writings & Projects</h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Thoughts, stories, and explorations on AI, philosophy, poetry and much more.
+          Thoughts and projects on AI, science, and philosophy.
         </p>
       </header>
 

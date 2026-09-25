@@ -14,6 +14,8 @@ import 'katex/dist/katex.min.css'; // Latex styles
 import TerminalCard from '@/components/TerminalCard';
 import TableOfContents from '@/components/TableOfContents';
 import BlogActions from '@/components/BlogActions';
+import ConvmindsDemo from '@/components/ConvmindsDemo';
+import ProjectCover from '@/components/ProjectCover';
 
 function SideNote({ children, id }: { children: React.ReactNode; id: string }) {
     return (
@@ -45,7 +47,9 @@ function SideNote({ children, id }: { children: React.ReactNode; id: string }) {
 
 const components = {
     SideNote,
-    TerminalCard, // Allow using terminal card in posts
+    TerminalCard,
+    ConvmindsDemo,
+    ProjectCover,
 };
 
 interface Props {

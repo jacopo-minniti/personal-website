@@ -1,0 +1,85 @@
+---
+title: "Convergent Minds"
+subtitle: "Can time-aligned fMRI add useful information to a frozen language model?"
+date: "2026-08-23"
+tags: ["AI", "neuroscience", "language models", "PyTorch", "project"]
+thumbnail: "/projects/convminds/cover.jpeg"
+---
+
+<p className="text-lg leading-relaxed text-slate-300">
+  Convergent Minds is an early PyTorch codebase for asking one controlled question: can a time-aligned fMRI trace add predictive information to a language model that already has the preceding text?
+</p>
+
+<div className="mt-6 border-l-2 border-[var(--pastel-cyan)] bg-[var(--pastel-cyan)]/5 px-5 py-4 text-sm leading-relaxed text-slate-300">
+  <span className="font-bold text-[var(--pastel-cyan)]">The constraint:</span> compare the brain-conditioned model with the same frozen model and the same text context. If the brain input does not improve the held-out prediction, the honest answer is that it did not help.
+</div>
+
+## What one sample means
+
+The current Huth alignment path turns a narrated story into small time-locked examples. Text from the previous three repetition times becomes the language-model context. A target text segment begins at the next time point. The model receives four fMRI frames after that target, where the delayed BOLD response should carry information about it.
+
+<div className="mt-5 grid gap-2 text-center font-mono text-xs sm:grid-cols-[1fr_28px_1fr_28px_1fr] sm:items-stretch">
+  <div className="border border-border bg-black/10 p-3 text-muted">context<br /><span className="text-[var(--pastel-orange)]">t−3 … t−1</span></div>
+  <div className="hidden self-center text-[var(--pastel-purple)] sm:block">→</div>
+  <div className="border border-border bg-black/10 p-3 text-muted">target segment<br /><span className="text-[var(--pastel-green)]">t</span></div>
+  <div className="hidden self-center text-[var(--pastel-purple)] sm:block">←</div>
+  <div className="border border-border bg-black/10 p-3 text-muted">BOLD window<br /><span className="text-[var(--pastel-cyan)]">t+1 … t+4</span></div>
+</div>
+
+## What is currently implemented
+
+<div className="mt-5 grid gap-3 sm:grid-cols-3">
+  <div className="border border-border p-4">
+    <p className="text-xs font-bold uppercase tracking-wider text-[var(--pastel-cyan)]">alignment</p>
+    <p className="mt-2 text-sm text-muted">Reduce each subject&apos;s BOLD signal to 1,000 PCA features, normalize each story run, and preserve the timing needed for the experiment.</p>
+  </div>
+  <div className="border border-border p-4">
+    <p className="text-xs font-bold uppercase tracking-wider text-[var(--pastel-purple)]">intervention</p>
+    <p className="mt-2 text-sm text-muted">Keep GPT-2 frozen; use a cross-attention adapter to add a small residual vector at one or more transformer layers.</p>
+  </div>
+  <div className="border border-border p-4">
+    <p className="text-xs font-bold uppercase tracking-wider text-[var(--pastel-green)]">training</p>
+    <p className="mt-2 text-sm text-muted">First learn the hidden-state shift with MSE; then optimize next-token cross-entropy while steering only target tokens.</p>
+  </div>
+</div>
+
+## The intervention
+
+The adapter receives a 4 × 1,000 brain window. It turns the language model&apos;s current hidden state into a query and the brain frames into keys and values. Its output is a residual shift added to the selected transformer layer. The lower and upper parts of the language model remain intact; only the small adapter learns.
+
+<ConvmindsDemo />
+
+## What needs to be shown before a result means anything
+
+<div className="mt-5 space-y-3 text-sm text-muted">
+  <div className="border border-border p-4"><span className="font-bold text-[var(--pastel-orange)]">01 / Same-context baseline.</span> The brain-conditioned model should be compared with the frozen language model given exactly the same transcript context.</div>
+  <div className="border border-border p-4"><span className="font-bold text-[var(--pastel-orange)]">02 / Wrong-time control.</span> Shifting the BOLD window before the target event should remove any apparent effect. Otherwise slow drift or story-level correlations may be doing the work.</div>
+  <div className="border border-border p-4"><span className="font-bold text-[var(--pastel-orange)]">03 / Leakage audit.</span> Stateful preprocessing must be fitted on training data only. The generic data module supports that rule; the current Huth alignment path still needs a formal audit before I would trust a score.</div>
+</div>
+
+## Repository window
+
+This is the core adapter, in abbreviated form. The language hidden state chooses what to read from the BOLD window; the result is mapped back into the language model&apos;s hidden space.
+
+<div className="mt-5 overflow-hidden border border-border bg-[#0d1117] shadow-[6px_6px_0px_rgba(48,54,61,0.35)]">
+  <div className="flex items-center justify-between border-b border-border bg-white/5 px-4 py-2">
+    <div className="flex gap-1.5">
+      <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f56]" />
+      <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
+      <span className="h-2.5 w-2.5 rounded-full bg-[#27c93f]" />
+    </div>
+    <span className="font-mono text-xs text-foreground/80"><span className="text-[var(--pastel-green)]">$</span> cat convminds/models/residual_steer.py</span>
+  </div>
+  <pre className="overflow-x-auto p-5 text-xs leading-6 text-slate-300"><code><span className="text-[var(--pastel-purple)]">class</span> <span className="text-[var(--pastel-cyan)]">BrainSteerAdapter</span>(nn.Module):{`\n`}  <span className="text-muted"># Map four BOLD frames to an LLM-space residual.</span>{`\n`}{`\n`}  <span className="text-[var(--pastel-purple)]">def</span> forward(self, brain_window, hidden_query):{`\n`}    keys = self.W_K(brain_window){`\n`}    values = self.W_V(brain_window){`\n`}    query = self.W_Q(hidden_query){`\n`}    attended, _ = self.attn(query, keys, values){`\n`}    <span className="text-[var(--pastel-purple)]">return</span> self.mlp(attended)</code></pre>
+  <div className="border-t border-border px-5 py-3">
+    <a href="https://github.com/jacopo-minniti/convminds/blob/main/convminds/models/residual_steer.py" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs text-[var(--pastel-cyan)] hover:underline">
+      Open the current source on GitHub ↗
+    </a>
+  </div>
+</div>
+
+## Scope
+
+No decoding result is claimed here. This is research infrastructure in progress, not a finished decoder or a clinical tool. The near-term aim is simple: make one held-out, time-controlled comparison that is hard to misread, then publish the trace whether the brain signal helps or not.
+
+<a href="https://github.com/jacopo-minniti/convminds" target="_blank" rel="noreferrer" className="mt-8 inline-block text-sm text-[var(--pastel-orange)] hover:underline">repository ↗</a>
