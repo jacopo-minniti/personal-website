@@ -91,7 +91,7 @@ export default function Navbar() {
         </div>
 
         {/* Right Section: Desktop Nav + Socials */}
-        <div className="flex items-center justify-end gap-6">
+        <div className="ml-auto flex items-center justify-end gap-6">
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link, idx) => {
