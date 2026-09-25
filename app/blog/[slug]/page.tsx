@@ -130,7 +130,7 @@ export default async function BlogPost({ params }: Props) {
 
             <div className="px-6 max-w-[1500px] mx-auto flex flex-col lg:flex-row justify-center gap-12 relative">
                 {/* Left: Operations + Outline (Desktop) */}
-                <aside className="hidden lg:block w-40 flex-shrink-0 space-y-6">
+                <aside className="hidden lg:block w-[280px] flex-shrink-0 space-y-6">
                     <div>
                         <div className="text-xs font-bold text-muted uppercase tracking-wider mb-2 font-mono">Operations</div>
                         <BlogActions />
