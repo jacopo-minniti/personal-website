@@ -11,6 +11,7 @@ export interface PostData {
     date: string;
     tags: string[];
     thumbnail?: string;
+    draft?: boolean;
     content: string;
 }
 
@@ -36,9 +37,10 @@ export function getSortedPostsData(): PostData[] {
             date: result.data.date || new Date().toISOString(),
             tags: result.data.tags || [],
             thumbnail: result.data.thumbnail || '/background.jpg', // Default thumbnail
+            draft: result.data.draft || false,
             content: result.content,
         } as PostData;
-    });
+    }).filter((post) => !post.draft);
 
     return allPostsData.sort((a, b) => {
         if (a.date < b.date) {
@@ -57,6 +59,10 @@ export async function getPostData(id: string) {
 
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const result = matter(fileContents);
+
+    if (result.data.draft) {
+        return null;
+    }
 
     return {
         id,

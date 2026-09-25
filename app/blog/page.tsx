@@ -3,8 +3,10 @@ import ScrollableBlogList from './ScrollableBlogList';
 
 export default function BlogPage() {
   const posts = getSortedPostsData();
-  const allTags = Array.from(new Set(posts.flatMap((post) => post.tags)))
-    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' }));
+  const sectionOrder = ["Deep Learning", "Computer Science", "Novels and Poetry", "Philosophy"];
+  const allTags = sectionOrder.filter((section) =>
+    posts.some((post) => post.tags.includes(section))
+  );
 
   return (
     <div className="min-h-screen py-10 px-6 max-w-7xl mx-auto">

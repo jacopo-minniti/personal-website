@@ -150,7 +150,7 @@ export default async function BlogPost({ params }: Props) {
                 <main className="flex-none max-w-3xl w-full mx-auto lg:mx-0">
 
                     {/* Article Body */}
-                    <article className="relative prose prose-invert prose-headings:font-mono prose-p:font-mono prose-a:text-[var(--pastel-orange)] prose-img:border prose-img:border-border prose-pre:bg-[#0d1117] prose-pre:border prose-pre:border-border max-w-none text-left overflow-visible
+                    <article className="relative prose prose-invert prose-headings:font-mono prose-p:font-mono prose-a:text-[var(--pastel-orange)] prose-img:mb-0 prose-img:rounded-md prose-img:border prose-img:border-border prose-figure:my-10 prose-figcaption:mt-3 prose-figcaption:text-center prose-figcaption:font-mono prose-figcaption:text-sm prose-figcaption:leading-relaxed prose-figcaption:text-muted prose-pre:bg-[#0d1117] prose-pre:border prose-pre:border-border max-w-none text-left overflow-visible
                         prose-p:text-[15px] prose-p:leading-relaxed prose-p:mb-4
                         prose-headings:mb-4 prose-headings:mt-8
                         prose-h2:text-2xl prose-h3:text-xl

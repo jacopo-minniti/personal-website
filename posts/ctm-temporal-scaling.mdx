@@ -2,15 +2,17 @@
 title: "Decoupling Compute and Data: Some Examples from the CTM"
 subtitle: "Exploring inference-time scaling and internal dynamics in neural networks."
 date: "2026-01-24"
-tags: ["AI", "interpretability"]
+tags: ["Deep Learning"]
 thumbnail: "/posts/ctm/cover.png"
 ---
 
-I’ve come to view the **Continuous Thought Machine (CTM)** as one of the most compelling directions in deep learning right now. Its real beauty isn't just in the performance, but in how it challenges our assumptions about model structure—giving a network the agency to discover its own internal rhythm through inductive biases inspired by the human brain.
+The thing I like about the **Continuous Thought Machine** is not that it is “brain-inspired.” That phrase has been stretched until it means almost nothing. What I like is much simpler: the CTM gives a neural network something like a private clock.
 
-The standout feature for me is the latent space. Instead of relying on traditional fixed layers, the CTM uses a synchrony matrix to encode temporal relations between neurons. This serves as the primary engine for attention and output. It hints at a future where we don't scale computation by just piling on more tokens, but by allowing for richer, deeper internal dynamics over time.
+A transformer mostly thinks by writing. If it wants more computation, it usually has to emit more tokens, or pretend to reason in public through a Chain-of-Thought. The CTM instead has an internal temporal dimension: it can keep updating itself without necessarily producing more external symbols. This sounds small, but it changes the geometry of the problem. Compute is no longer glued to text length.
 
-Before we dive into the weeds, I highly recommend playing around with the official interactive page to get a feel for how these dynamics actually move:
+The central object is the synchrony matrix. Rather than treating all internal units as a static vector of activations, the CTM asks which units are moving together through time. The model’s state is not only “what is active?” but “what is co-varying?” That is a much richer kind of internal evidence.
+
+If you have not seen the dynamics, the official interactive demo is worth playing with before reading further:
 
 <iframe
   src="https://pub.sakana.ai/ctm/"
@@ -19,90 +21,136 @@ Before we dive into the weeds, I highly recommend playing around with the offici
   style={{ border: "1px solid #ddd", borderRadius: "8px" }}
 />
 
-## Why We Need to Decouple Scaling from Data
+## The annoying marriage of data and compute
 
-Transformers are undeniably powerful, and post-training tricks like RLVR have done wonders for "unlocking" reasoning. But there’s a catch: that reasoning is almost always tethered to the length of a Chain-of-Thought (CoT) sequence. 
+Current language models have a strange habit: when they need to think longer, they often need to speak longer. This is useful engineering, but conceptually awkward.
 
-This creates a frustrating bottleneck: **our scaling is stuck to our data.**
-* Transformers are notoriously data-hungry.
-* CoT often feels like an architectural "hack"—sometimes the value isn't the words themselves, but simply the extra time given to the residual stream to process information <SideNote id="1">See the literature on CoT unfaithfulness, for example, Turpin et al. (2023) at [arXiv:2307.13702](https://arxiv.org/abs/2307.13702).</SideNote>.
-* Linking "thinking" to "token generation" feels biologically "off." Humans do a massive amount of complex reasoning without uttering a single word, though the extent of that is still a hot topic in cognitive science <SideNote id="2">For perspectives on this debate, see [Fedorenko et al., 2024](https://www.nature.com/articles/s44159-024-00283-3) and Berwick & Chomsky's *[Why Only Us](https://direct.mit.edu/books/book/4464/Why-Only-UsLanguage-and-Evolution)*.</SideNote>.
+* More reasoning often means more generated tokens.
+* More generated tokens means more dependence on the distribution of written reasoning traces.
+* Written reasoning traces are not the same thing as thinking.
 
-The CTM flips the script. Its synchrony matrix $S \in \mathbb{R}^{D \times D}$ scales independently of the data volume. This is a massive shift, but it leaves us with a new puzzle: how should these internal temporal dynamics actually talk to the external data coming in?
+This does not mean Chain-of-Thought is useless. It clearly works. But it also entangles two things that I would like to separate: **the amount of external data consumed or produced** and **the amount of internal computation performed**.
 
-## My Investigations: Motivations and Interventions
+In humans, this distinction is obvious. You can stare at a chess position, look away, and continue working internally. You can understand a sentence, stop reading, and keep turning it over in your mind. Whether language is necessary for thought is a complicated question <SideNote id="1">For perspectives on this debate, see [Fedorenko et al., 2024](https://www.nature.com/articles/s44159-024-00283-3) and Berwick & Chomsky's *[Why Only Us](https://direct.mit.edu/books/book/4464/Why-Only-UsLanguage-and-Evolution)*.</SideNote>, but it is clearly not the whole story.
 
-I started digging into the CTM after noticing two specific behaviors in the original paper:
-1. **The "Quick Finish":** The model often hits a ceiling early (around $t=15$ on CIFAR-10).
-2. **Sensory Overload:** It forces fresh input ($o_t$) into the system at every single tick.
+The CTM is interesting because it makes this separation natural. Its synchrony matrix $S \in \mathbb{R}^{D \times D}$ is an internal computational object. It scales with the model’s latent dynamics, not directly with the length of the input sequence. So the question becomes: if the model has this private time, how should it use it?
 
-In the real world, we don't just stare at a problem until we solve it; we look, we internalize, and then we "dwell" on the thought while ignoring distractions. I wanted to see if I could nudge the CTM to learn that same rhythm: **early exploration (seeking data) followed by internal consolidation (trusting its own thoughts).**
+## Looking, then dwelling
 
-I tested two main interventions.
+When I started poking at the CTM, two behaviors bothered me.
 
-### 1. The Perceptual Gate (PG)
+First, the model often seemed to finish early. On CIFAR-10, much of the useful decision-making appeared to happen around the first handful of ticks. After that, additional time was not always additional thought.
 
-To give the model a "filter," I added a **Perceptual Gate (PG)**. This produces a scalar retention score $r_t \in [0, 1]$ based on the model's own action synchrony. It essentially decides the mix between what the model is currently thinking ($z_t$) and what it's seeing ($o_t$):
+Second, the model kept receiving fresh sensory input at every tick. This felt wrong. Not wrong in a moral sense, but wrong in the way a simulation of thinking feels wrong when the character never blinks.
+
+A useful cognitive rhythm is not “look forever.” It is more like:
+
+1. sample the world,
+2. form a candidate internal picture,
+3. stop letting every new pixel bully the latent state,
+4. refine.
+
+So I tried to make the CTM learn something closer to that rhythm.
+
+## A small gate for perception
+
+The first modification was a **Perceptual Gate**. At each tick, the model produces a retention value $r_t \in [0,1]$. This value decides how much of the next state should come from the model’s current internal state $z_t$ versus the new observation $o_t$:
 
 $$
 x_{t+1} = r_t z_t + (1 - r_t) o_t
 $$
 
-* **When $r_t \to 1$**: The model "closes its eyes" and focuses on internal refinement.
-* **When $r_t \to 0$**: It prioritizes the fresh sensory data.
+When $r_t$ is close to 0, the model is still looking. When $r_t$ is close to 1, it is mostly dwelling internally.
 
-This setup makes the model’s behavior incredibly easy to interpret—you can literally see when it decides it’s seen enough.
+I like this intervention because it is almost embarrassingly direct. There is no mystery variable called “reasoning.” There is just a knob that says how much the model trusts perception right now.
 
-### 2. The Exploit & Explore Loss
+## A nudge toward rhythm
 
-I also tweaked the loss function to reward this "look then think" behavior. Along with the standard CTM ticks, I defined two specific moments:
+The second modification was a small loss term. I wanted the model to discover a temporal shape: first explore, then consolidate.
 
-* **$t_{look}$ (The "Aha!" moment)**: Peak novelty in attention.
-* **$t_{dwell}$ (The "Thinking" moment)**: Peak change in the internal activations.
+I defined two moments:
 
-I then added a regularization term:
-$$\lambda_{gate} \cdot [ r_{look}^2 + (1 - r_{dwell})^2 ]$$
+* $t_{look}$: the moment of high perceptual novelty.
+* $t_{dwell}$: the moment of large internal change.
 
-This is a gentle nudge that says: "Don't ignore the world when you're supposed to be looking, and don't let the world distract you when you're supposed to be thinking."
+Then I added:
 
-## What the Data Shows
+$$
+\lambda_{gate} \cdot [ r_{look}^2 + (1 - r_{dwell})^2 ]
+$$
 
-I ran the full "both" configuration (PG + Loss) against a standard baseline on CIFAR-10 for 200k iterations. 
+This rewards low retention while the model is still looking, and high retention once it should be dwelling. It is not meant to force a rigid schedule. It is more like tapping the table in the tempo I want the model to hear.
 
-### Stability and Overfitting
+## What changed
 
-The "both" condition didn't just perform better; it was significantly more stable. It carved out a much smoother Pareto-dominant accuracy curve.
+I compared a baseline CTM against the combined version: Perceptual Gate plus the rhythm loss. The task was CIFAR-10, trained for 200k iterations.
 
-![Test Accuracy vs Baseline](/posts/ctm/test_accuracy_vs_baseline.png)
-*Figure 1: Test accuracy. Notice how the "both" condition (bottom) is much less jittery and hits higher peaks.* That said, there’s no free lunch. The "both" condition overfits like crazy. By giving the model more capacity and more specific supervision per sample, it becomes very good at memorizing the quirks of the training set.
+### Accuracy became less twitchy
 
-![Train Accuracy vs Baseline](/posts/ctm/train_accuracy_vs_baseline.png)
-*Figure 2: The flip side—significant overfitting when we combine the gate and the loss.* ### When Does the Model Decide?
+The first thing I noticed was not just higher accuracy, but a different texture of learning. The modified model was smoother. The baseline had more of the usual nervous motion: up, down, up, down, as if each checkpoint was renegotiating the same fragile agreement.
 
-In the baseline CTM, the model usually makes up its mind almost immediately (around tick 12). 
+<figure>
+  <img src="/posts/ctm/test_accuracy_vs_baseline.png" alt="Test Accuracy vs Baseline" />
+  <figcaption><span className="font-bold text-[var(--pastel-orange)]">Figure 1.</span> Test accuracy. The combined model is less jittery and reaches better peaks.</figcaption>
+</figure>
 
-With my changes, that "rush to judgment" disappears. The model starts spreading its decisions across the mid-range ticks (averaging around 22). It’s as if the model finds a likely candidate quickly, but then uses the extra time to double-check its work.
+But there was a cost. The modified model overfit heavily. This is not surprising: I gave it more machinery and a more opinionated training signal. It used both.
 
-![Tick Distribution](/posts/ctm/tick_distribution_panels.png)
-*Figure 3: Distribution of certainty. The baseline (blue) is impatient; the "both" version takes its time.* ### Per-Tick Performance
+<figure>
+  <img src="/posts/ctm/train_accuracy_vs_baseline.png" alt="Train Accuracy vs Baseline" />
+  <figcaption><span className="font-bold text-[var(--pastel-orange)]">Figure 2.</span> Training accuracy. The same intervention that stabilizes test behavior also makes memorization easier.</figcaption>
+</figure>
 
-This is where it gets interesting. The baseline CTM actually gets *worse* if you let it think too long (past tick 10). But the "both" condition stays rock-solid at about 83-84% accuracy across the whole timeline.
+### The decision moved later
 
-![Per Tick Accuracy](/posts/ctm/per_tick_accuracy_panels.png)
-*Figure 4: Baseline accuracy falls off a cliff over time, while our version stays flat.* This tells us the model isn't necessarily finding *new* info in those later ticks—it's just organizing its existing beliefs better.
+The baseline CTM often commits early. It tends to become confident around tick 12. The modified model waits longer, with decisions spreading toward the middle ticks.
 
-### Early Exit: The Best of Both Worlds
+That delay is not automatically good. A model can also wait because it is confused. But paired with the accuracy curves, the shift looks more like verification than hesitation. The model reaches a plausible answer, then uses extra internal time to make it less brittle.
 
-Because the accuracy is so high even in the early stages, these models are perfect for "early-exit" strategies. If you tell the model to stop as soon as it's 80% sure, the "both" version hits that target much faster and with way better accuracy than the baseline.
+<figure>
+  <img src="/posts/ctm/tick_distribution_panels.png" alt="Tick Distribution" />
+  <figcaption><span className="font-bold text-[var(--pastel-orange)]">Figure 3.</span> Certainty over ticks. The baseline is impatient; the modified model distributes commitment across later internal time.</figcaption>
+</figure>
 
-![First Certainty](/posts/ctm/first_certainty_panels.png)
-*Figure 5: Reaching the 0.8 certainty threshold happens faster and more accurately in the modified model.* ### The S-Curve of Thought
+### More time stopped being harmful
 
-Finally, I checked the retention score $r_t$ to see if the model actually learned the "look then dwell" strategy. It did. The curve is a near-perfect S-shape: low retention (looking) at the start, rising to near 1.0 (internal dwelling) by the end.
+This was the most interesting result to me. In the baseline, later ticks can become actively worse. Letting the model “think” longer is not necessarily helpful; sometimes it just drifts.
 
-![Retention Panels](/posts/ctm/retention_panels.png)
-*Figure 6: The "both" condition (left) shows a clear, logical progression from external perception to internal thought.* ## Closing Thoughts
+The modified model does not show the same collapse. Its accuracy stays much flatter across time.
 
-The CTM is remarkably sensitive to how we structure its "thinking time." By introducing the Perceptual Gate and a more nuanced loss function, we moved the model away from "lazy" strategies toward a much more structured form of computation.
+<figure>
+  <img src="/posts/ctm/per_tick_accuracy_panels.png" alt="Per Tick Accuracy" />
+  <figcaption><span className="font-bold text-[var(--pastel-orange)]">Figure 4.</span> Per-tick accuracy. The baseline degrades with time, while the gated model remains stable.</figcaption>
+</figure>
 
-We aren't just chasing a higher accuracy percentage on CIFAR-10 here. The real goal is proving that we can deliberately shape how a model allocates its internal resources. As we move toward more complex tasks, being able to tune "thinking time" will be just as important as tuning the weights themselves.
+This matters because inference-time compute is only useful if extra computation remains coherent. A model that gets worse when allowed to continue is not thinking longer. It is dissolving.
+
+### Early exits improved
+
+Because the modified model remains accurate across the trajectory, it also works better with early-exit rules. If we stop once confidence crosses a threshold, the gated model can reach that threshold quickly without paying as much in accuracy.
+
+<figure>
+  <img src="/posts/ctm/first_certainty_panels.png" alt="First Certainty" />
+  <figcaption><span className="font-bold text-[var(--pastel-orange)]">Figure 5.</span> First crossing of the 0.8 certainty threshold. The modified model reaches usable confidence more cleanly.</figcaption>
+</figure>
+
+This is the nice version of inference-time scaling: not “always spend more compute,” but “spend compute until the internal state has settled.”
+
+### The gate learned the story
+
+Finally, I looked at $r_t$. If the whole setup was doing what I hoped, retention should start low and rise over time. That is what happened. The curve has the shape one would want: early openness to perception, then increasing internal closure.
+
+<figure>
+  <img src="/posts/ctm/retention_panels.png" alt="Retention Panels" />
+  <figcaption><span className="font-bold text-[var(--pastel-orange)]">Figure 6.</span> Retention over time. The model learns a clean transition from looking outward to dwelling inward.</figcaption>
+</figure>
+
+## Why I care about this
+
+The point is not CIFAR-10. The point is that “thinking time” should be an object we can shape.
+
+A lot of current scaling feels like increasing the size of the mouth: more tokens, longer traces, larger contexts. The CTM points toward a different axis. Give the model an internal temporal workspace, then ask how it should regulate contact with the world.
+
+The Perceptual Gate is a small experiment in that direction. It is probably not the final mechanism. It may not even be the right mechanism. But it makes one thing visible: a model can learn when to stop looking and start dwelling.
+
+That seems like a primitive worth taking seriously.

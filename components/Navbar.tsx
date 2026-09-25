@@ -56,7 +56,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
-      <div className="max-w-[90rem] mx-auto px-6 h-[4.75rem] flex items-center justify-between font-mono">
+      <div className="max-w-[84rem] mx-auto px-6 h-[4.75rem] flex items-center justify-between font-mono">
 
         {/* Left Section: Burger (Mobile) + Logo */}
         <div className="flex items-center gap-4">
@@ -70,18 +70,18 @@ export default function Navbar() {
           </button>
 
           {/* Logo Section */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-9 h-9">
+          <Link href="/" className="flex h-full items-center gap-3 group">
+            <div className="relative flex w-10 h-10 items-center justify-center">
               <Image
                 src="/logo_navbar.png"
                 alt="Logo"
                 fill
-                className="object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                className="object-contain object-center opacity-80 group-hover:opacity-100 transition-opacity"
               />
             </div>
             {/* Breadcrumb Text - Hidden on Mobile */}
             <div className="hidden md:flex items-center text-[var(--pastel-orange)] hover:text-white transition-colors">
-              <span className="text-lg font-bold tracking-tight">
+              <span className="text-[17px] font-bold tracking-tight">
                 {getBreadcrumb()}
               </span>
               <span className="animate-pulse inline-block w-2.5 h-5 bg-[var(--pastel-orange)] align-middle ml-1"></span>
@@ -101,7 +101,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href.replace('.', '')} // Ensure clean path for href
-                  className={`text-base transition-colors ${colorClass} ${isActive
+                  className={`text-[17px] transition-colors ${colorClass} ${isActive
                     ? 'font-bold underline decoration-2 underline-offset-4'
                     : 'opacity-80 hover:opacity-100'
                     }`}
@@ -126,7 +126,7 @@ export default function Navbar() {
                 className="text-muted hover:text-[var(--pastel-orange)] transition-colors"
                 aria-label={link.label}
               >
-                <link.icon size={19} />
+                <link.icon size={20} />
               </a>
             ))}
             {/* Preserve the compact icon-only resume link on mobile. */}
@@ -137,7 +137,7 @@ export default function Navbar() {
               className="md:hidden text-muted hover:text-[var(--pastel-orange)] transition-colors"
               aria-label="Resume"
             >
-              <FaAddressCard size={19} />
+              <FaAddressCard size={20} />
             </a>
           </div>
 
@@ -149,9 +149,9 @@ export default function Navbar() {
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center text-base font-semibold tracking-wide text-[var(--pastel-orange)] transition-colors hover:text-[var(--pastel-orange)]/80 hover:underline decoration-2 underline-offset-4"
+            className="hidden md:inline-flex items-center text-[17px] tracking-wide text-[var(--pastel-orange)] transition-colors hover:text-[var(--pastel-orange)]/80 hover:underline decoration-2 underline-offset-4"
           >
-            resume
+            resume.pdf
           </a>
         </div>
       </div>
