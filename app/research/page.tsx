@@ -87,11 +87,23 @@ export default function ResearchPage() {
                     <span className="text-xs font-bold bg-white/5 text-muted px-2 py-1 rounded border border-white/10 font-mono">
                       {paper.year}
                     </span>
-                    {paper.conference && (
-                       <span className="text-xs font-bold bg-[var(--pastel-green)]/10 text-[var(--pastel-green)] px-2 py-1 rounded border border-[var(--pastel-green)]/20 font-mono">
-                        {paper.conference}
-                      </span>
-                    )}
+                     {paper.conference && (
+                       paper.conferenceLink ? (
+                         <a
+                           href={paper.conferenceLink}
+                           target="_blank"
+                           rel="noreferrer"
+                           onClick={(e) => e.stopPropagation()}
+                           className="text-xs font-bold bg-[var(--pastel-green)]/10 text-[var(--pastel-green)] px-2 py-1 rounded border border-[var(--pastel-green)]/20 font-mono hover:underline"
+                         >
+                           {paper.conference}
+                         </a>
+                       ) : (
+                         <span className="text-xs font-bold bg-[var(--pastel-green)]/10 text-[var(--pastel-green)] px-2 py-1 rounded border border-[var(--pastel-green)]/20 font-mono">
+                           {paper.conference}
+                         </span>
+                       )
+                     )}
                     {paper.status && (
                        <span className="text-xs font-bold bg-[var(--pastel-purple)]/10 text-[var(--pastel-purple)] px-2 py-1 rounded border border-[var(--pastel-purple)]/20 font-mono">
                         {paper.status}
