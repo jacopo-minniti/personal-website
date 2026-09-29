@@ -62,8 +62,8 @@ export const papers: Paper[] = [
   {
     id: "p2",
     authors: ["Chen, P.", "Hulme, R.C.", "Minniti, J.", "Lee, C.L.", "Rodd, J.M."],
-    journal: "Journal of Memory and Language",
-    status: "Under Review",
+    journal: "",
+    status: "Under Review at Journal of Memory and Language",
     conference: "Published at CLDC 12",
     year: "2025",
     title: "Effects of Age, Semantic Relatedness, and Vocabulary Knowledge on Learning New Word Meanings",
