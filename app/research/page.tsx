@@ -88,12 +88,12 @@ export default function ResearchPage() {
                       {paper.year}
                     </span>
                     {paper.conference && (
-                      <span className="text-xs font-bold bg-[var(--pastel-purple)]/10 text-[var(--pastel-purple)] px-2 py-1 rounded border border-[var(--pastel-purple)]/20 font-mono">
+                       <span className="text-xs font-bold bg-[var(--pastel-green)]/10 text-[var(--pastel-green)] px-2 py-1 rounded border border-[var(--pastel-green)]/20 font-mono">
                         {paper.conference}
                       </span>
                     )}
                     {paper.status && (
-                      <span className="text-xs font-bold bg-[var(--pastel-yellow)]/10 text-[var(--pastel-yellow)] px-2 py-1 rounded border border-[var(--pastel-yellow)]/20 font-mono">
+                       <span className="text-xs font-bold bg-[var(--pastel-purple)]/10 text-[var(--pastel-purple)] px-2 py-1 rounded border border-[var(--pastel-purple)]/20 font-mono">
                         {paper.status}
                       </span>
                     )}
