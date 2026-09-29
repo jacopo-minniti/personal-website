@@ -20,15 +20,10 @@ export default function ResearchPage() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const getLinkText = (link: string, isPreregistration?: boolean) => {
+  const getLinkText = (isPreregistration?: boolean) => {
     if (isPreregistration) return "View Preregistration";
-    
-    let source = "";
-    if (link.toLowerCase().includes("arxiv")) source = " (ArXiv)";
-    else if (link.toLowerCase().includes("openreview")) source = " (OpenReview)";
-    
-    return `View Paper${source}`;
-  };
+    return "View Paper";
+   };
 
   return (
     <div className="min-h-screen py-20 px-4 md:px-6 max-w-5xl mx-auto">
@@ -73,7 +68,7 @@ export default function ResearchPage() {
                           onClick={(e) => e.stopPropagation()}
                           className="inline-flex items-center gap-2 text-xs font-bold border border-[var(--pastel-orange)] text-[var(--pastel-orange)] hover:bg-[var(--pastel-orange)] hover:text-background px-4 py-1.5 rounded transition-colors font-mono"
                         >
-                          {getLinkText(paper.link, paper.isPreregistration)}
+                          {getLinkText(paper.isPreregistration)}
                         </a>
                       </div>
                     )}
@@ -92,14 +87,19 @@ export default function ResearchPage() {
                     <span className="text-xs font-bold bg-white/5 text-muted px-2 py-1 rounded border border-white/10 font-mono">
                       {paper.year}
                     </span>
-                    {paper.journal && (
-                      <span className="text-xs font-bold bg-[var(--pastel-blue)]/10 text-[var(--pastel-blue)] px-2 py-1 rounded border border-[var(--pastel-blue)]/20 font-mono">
-                        {paper.journal}
-                      </span>
-                    )}
                     {paper.conference && (
                       <span className="text-xs font-bold bg-[var(--pastel-purple)]/10 text-[var(--pastel-purple)] px-2 py-1 rounded border border-[var(--pastel-purple)]/20 font-mono">
                         {paper.conference}
+                      </span>
+                    )}
+                    {paper.status && (
+                      <span className="text-xs font-bold bg-[var(--pastel-yellow)]/10 text-[var(--pastel-yellow)] px-2 py-1 rounded border border-[var(--pastel-yellow)]/20 font-mono">
+                        {paper.status}
+                      </span>
+                    )}
+                    {paper.journal && (
+                      <span className="text-xs font-bold bg-[var(--pastel-blue)]/10 text-[var(--pastel-blue)] px-2 py-1 rounded border border-[var(--pastel-blue)]/20 font-mono">
+                        {paper.journal}
                       </span>
                     )}
                   </div>
