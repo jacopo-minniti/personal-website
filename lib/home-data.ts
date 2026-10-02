@@ -29,7 +29,7 @@ export const bioData = {
     contact: {
         email: "jacopo@uni.minerva.edu",
         display: "jacopo [at] uni [dot] minerva [dot] edu",
-        bookingUrl: "https://cal.com/jacopominniti/coffechat"
+        bookingUrl: "https://cal.com/jacopominniti/coffeechat"
     }
 };
 
