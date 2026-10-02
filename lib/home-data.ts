@@ -10,7 +10,7 @@ export const galleryImages = [
     { path: "/gallery_viewer/gallery1.jpeg", description: "How can such a damned place like Calabria be so beatiful?" },
     { path: "/gallery_viewer/gallery2.jpeg", description: "Patagonia is Earth+" },
     { path: "/gallery_viewer/gallery4.JPG", description: "Spot the differences..." },
-    // Add more images here. 
+    // Add more images here.
     // Simply place your images in the /public/gallery_viewer folder at the root of the project
     // and reference them here like: "/gallery_viewer/your-image-name.jpg"
 ];
@@ -23,12 +23,13 @@ export const bioData = {
         { name: "Sakana AI", url: "https://sakana.ai/", colorClass: "bg-[var(--pastel-purple)]/10 hover:bg-[var(--pastel-purple)]/20 border-[var(--pastel-purple)]/20 text-[var(--pastel-purple)]" },
         { name: "University of Toronto", url: "https://www.utoronto.ca/", colorClass: "bg-[var(--pastel-blue)]/10 hover:bg-[var(--pastel-blue)]/20 border-[var(--pastel-blue)]/20 text-[var(--pastel-blue)]" },
         { name: "XLab (University of Chicago)", url: "https://xrisk.uchicago.edu/", colorClass: "bg-[var(--pastel-red)]/10 hover:bg-[var(--pastel-red)]/20 border-[var(--pastel-red)]/20 text-[var(--pastel-red)]" },
-        { name: "BLP Lab (NTU)", url: "https://sites.google.com/view/ntublplab/home?authuser=0", colorClass: "bg-[var(--pastel-green)]/10 hover:bg-[var(--pastel-green)]/20 border-[var(--pastel-green)]/20 text-[var(--pastel-green)]" },
-        { name: "Minerva University", url: "https://www.minerva.edu", colorClass: "bg-[var(--pastel-orange)]/10 hover:bg-[var(--pastel-orange)]/20 border-[var(--pastel-orange)]/20 text-[var(--pastel-orange)]" }
+        // { name: "BLP Lab (NTU)", url: "https://sites.google.com/view/ntublplab/home?authuser=0", colorClass: "bg-[var(--pastel-green)]/10 hover:bg-[var(--pastel-green)]/20 border-[var(--pastel-green)]/20 text-[var(--pastel-green)]" },
+        // { name: "Minerva University", url: "https://www.minerva.edu", colorClass: "bg-[var(--pastel-orange)]/10 hover:bg-[var(--pastel-orange)]/20 border-[var(--pastel-orange)]/20 text-[var(--pastel-orange)]" }
     ],
     contact: {
         email: "jacopo@uni.minerva.edu",
-        display: "jacopo [at] uni [dot] minerva [dot] edu"
+        display: "jacopo [at] uni [dot] minerva [dot] edu",
+        bookingUrl: "https://cal.com/jacopominniti/coffechat"
     }
 };
 
@@ -65,7 +66,7 @@ export const researchInterests = {
         super().__init__()
         self.synapses = DynamicSynapses()
         self.plasticity = HebbianLearning()
-    
+
     def forward(self, x):
         # Biologically plausible forward pass
         return self.plasticity(self.synapses(x))`
@@ -77,7 +78,7 @@ export const researchInterests = {
         # Compressing high-dimensional learning dynamics
         state = measure_network_state(network)
         order_parameters = identify_macroscopic_variables(state)
-        
+
         # Toward a statistical theory of intelligence
         return characterize_phases(order_parameters)`
         },

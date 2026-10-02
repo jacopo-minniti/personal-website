@@ -193,11 +193,16 @@ export default function BioCard() {
                 {/* Contact */}
                 <div className="border-t border-border pt-4 font-mono text-sm">
                     <p className="mb-2">
-                        <span className="text-[var(--pastel-orange)]">$</span> contact --email
+                        <span className="text-[var(--pastel-orange)]">$</span> contact --channels email calendar
                     </p>
-                    <a href={`mailto:${bioData.contact.email}`} className="text-sm text-white hover:underline decoration-[var(--pastel-orange)] underline-offset-4 decoration-2">
-                        {bioData.contact.display}
-                    </a>
+                    <div className="flex flex-col items-start gap-2">
+                        <a href={`mailto:${bioData.contact.email}`} className="text-sm text-white hover:underline decoration-[var(--pastel-orange)] underline-offset-4 decoration-2">
+                            {bioData.contact.display}
+                        </a>
+                        <a href={bioData.contact.bookingUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-white hover:underline decoration-[var(--pastel-orange)] underline-offset-4 decoration-2">
+                            book a coffee chat ↗
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
