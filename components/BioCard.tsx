@@ -71,7 +71,7 @@ export default function BioCard() {
 
         const timeoutId = setTimeout(() => {
             setCharIndex(prev => prev + 1);
-        }, 10); // Standard speed
+        }, 10 / 1.5);
 
         return () => clearTimeout(timeoutId);
     }, [charIndex, totalLength]);
