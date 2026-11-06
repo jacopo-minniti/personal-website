@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { FaLinkedin, FaGithub, FaAddressCard, FaBars, FaTimes } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaBars, FaTimes } from 'react-icons/fa';
 import { SiGooglescholar } from 'react-icons/si';
 
 export default function Navbar() {
@@ -29,7 +29,6 @@ export default function Navbar() {
     { icon: SiGooglescholar, href: "https://scholar.google.com/citations?user=35e-vPwAAAAJ&hl=en&oi=ao", label: "Google Scholar" },
     { icon: FaGithub, href: "https://github.com/jacopo-minniti", label: "GitHub" },
     { icon: FaLinkedin, href: "https://Linkedin.com/in/jacopo-minniti/", label: "LinkedIn" },
-    { icon: FaAddressCard, href: "/resume.pdf", label: "Resume" },
   ];
 
   // Colors for nav items
@@ -117,7 +116,7 @@ export default function Navbar() {
 
           {/* Socials - Visible on Mobile too */}
           <div className="flex items-center gap-4">
-            {socialLinks.filter((link) => link.label !== 'Resume').map((link, idx) => (
+            {socialLinks.map((link, idx) => (
               <a
                 key={idx}
                 href={link.href}
@@ -129,30 +128,17 @@ export default function Navbar() {
                 <link.icon size={20} />
               </a>
             ))}
-            {/* Preserve the compact icon-only resume link on mobile. */}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="md:hidden text-muted hover:text-[var(--pastel-orange)] transition-colors"
-              aria-label="Resume"
-            >
-              <FaAddressCard size={20} />
-            </a>
+
           </div>
 
           {/* Resume Divider */}
           <div className="h-4 w-px bg-border hidden md:block"></div>
 
-          {/* Desktop Resume Link */}
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center text-[17px] tracking-wide text-[var(--pastel-orange)] transition-colors hover:text-[var(--pastel-orange)]/80 hover:underline decoration-2 underline-offset-4"
-          >
-            resume.pdf
-          </a>
+          <div className="hidden md:flex items-center gap-2 text-[17px] tracking-wide text-[var(--pastel-orange)]">
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-4">resume</a>
+            <span className="font-light text-muted">/</span>
+            <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" className="hover:underline underline-offset-4">CV</a>
+          </div>
         </div>
       </div>
 
@@ -201,6 +187,11 @@ export default function Navbar() {
                 </Link>
               );
             })}
+            <div className="flex items-center gap-2 text-lg text-[var(--pastel-orange)]">
+              <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">resume</a>
+              <span className="font-light text-muted">/</span>
+              <a href="/cv.pdf" target="_blank" rel="noopener noreferrer">CV</a>
+            </div>
           </div>
 
           {/* Sidebar Footer (Optional decoration) */}
